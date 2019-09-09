@@ -5,6 +5,9 @@
 .ant-layout {
   background: transparent !important;
 }
+.ant-list  {
+  border: none !important;
+}
 .ant-layout-content {
   // background-color: #f7f7f7;
   padding: 0 15px;
@@ -36,4 +39,19 @@
 }
 .form-group {
   margin: 10px 0;
+}
+.ant-list-item a {
+  color: rgba(0, 0, 0, 0.65);
+}
+.list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  span, a {
+    color: rgba(0, 0, 0, 0.65);
+  }
+  .anticon {
+    margin-right: 10px;
+  }
 }

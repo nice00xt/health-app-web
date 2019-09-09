@@ -6,6 +6,8 @@ import Home from '../containers/home';
 import Profile from '../containers/profile';
 import CheckValoration from '../components/check-valoration';
 import VitalSigns from '../components/vital-signs';
+import ChartView from '../components/chart-view';
+import ChartDetail from '../components/chart-view/chart-detail'
 
 export class Routes extends Component {
   render () {
@@ -16,6 +18,8 @@ export class Routes extends Component {
         <Profile path="/profile" />
         <CheckValoration path="check-valoration"/>
         <VitalSigns path="vital-signs"/>
+        <ChartView path="chart-view" />
+        <ChartDetail path="chart-detail"/>
       </LayoutContent>
     </Router>
     )
