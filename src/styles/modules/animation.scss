@@ -1,0 +1,165 @@
+.fade-in--top {
+  opacity: 0;
+  transform: translateY(10px);
+  -webkit-animation-name: fadeintop;
+  animation-name: fadeintop;
+  animation-duration: 0.1s;
+  -webkit-animation-duration: 0.1s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-delay: 0.2s;
+  -webkit-animation-delay: 0.2s;
+}
+
+@keyframes fadeintop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in--bottom {
+  opacity: 0;
+  top: -80px;
+  -webkit-animation-name: fadeinbottom;
+  animation-name: fadeinbottom;
+  animation-duration: 0.2s;
+  -webkit-animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+  -webkit-animation-delay: 0.3s;
+}
+
+@keyframes fadeinbottom {
+  0% {
+    opacity: 0;
+    top: -80px;
+  }
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+.fade-in-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  -webkit-animation-name: fadeInScale;
+  animation-name: fadeInScale;
+  animation-duration: 0.1s;
+  -webkit-animation-duration: 0.1s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-delay: 0.1s;
+  -webkit-animation-delay: 0.1s;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  animation-duration: 0.4s;
+  -webkit-animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+  -webkit-animation-delay: 0.3s;
+}
+
+_:-ms-fullscreen, :root .fade-in {
+  opacity: 1!important;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-out-top {
+  opacity: 1;
+  transform: translateY(0);
+  -webkit-animation-name: fadeout;
+  animation-name: fadeout;
+  animation-duration: 0.4s;
+  -webkit-animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-delay: 3.5s;
+  -webkit-animation-delay: 3.5s;
+}
+
+_:-ms-fullscreen, :root .fade-out-top {
+  opacity: 1!important;
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-75px);
+  }
+}
+
+.fade-in-image {
+  opacity: 0;
+  -webkit-animation-name: fadeInImage;
+  animation-name: fadeIn;
+  animation-duration: 0.4s;
+  -webkit-animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+  -webkit-animation-delay: 0.3s;
+}
+
+_:-ms-fullscreen, :root .fade-in {
+  opacity: 1!important;
+}
+
+@keyframes fadeInImage {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.fadeIn-enter {
+  opacity: 0;
+}
+.fadeIn-enter-active {
+  opacity: 1;
+  transition: opacity 1s;
+}
+.fadeIn-exit {
+  opacity: 1;
+}
+.fadeIn-exit-active {
+  opacity: 0;
+  transition: opacity 1s;
+}

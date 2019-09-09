@@ -18,7 +18,7 @@ export class TabBar extends Component {
           <Col span={6}>
             <Button>
               <div className="tab-bar__button">
-                <Icon type="idcard" style={iconStyles} theme="twoTone" twoToneColor="#eb2f96"/>
+                <Icon type="idcard" style={iconStyles} theme="twoTone" twoToneColor="#f75275"/>
               </div>
             </Button>
           </Col>
