@@ -39,13 +39,15 @@ export class CheckValoration extends Component {
     ]
     return (
       <Fragment>
-        <div className="fade-in">
-          <PageHeader
-            onBack={() => window.history.back()}
-            title="Auto Valoración"
-          />
+        <div className='header'>
+          <div className="fade-in">
+            <PageHeader
+              onBack={() => window.history.back()}
+              title="Auto Valoración"
+            />
+          </div>
         </div>
-        <Content className="fade-in--top">
+        <Content className="fade-in">
           <Row>
             <Col span={24}>
               <form>

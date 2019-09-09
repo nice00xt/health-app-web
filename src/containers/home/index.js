@@ -18,9 +18,9 @@ export class Home extends Component {
     }
     const options =[
       { icon: 'schedule', title: 'Auto valoración', uri: 'check-valoration' },
-      { icon: 'fund', title: 'Signos vitales', uri: '/' },
+      { icon: 'fund', title: 'Signos vitales', uri: 'vital-signs' },
       { icon: 'medicine-box', title: 'Medicamentos', uri: '/' },
-      { icon: 'reconciliation', title: 'Salud educacional', uri: '/' },
+      { icon: 'reconciliation', title: 'Depresión', uri: '/' },
       { icon: 'pie-chart', title: 'Graficos', uri: '/' },
       { icon: 'idcard', title: 'Perfil', uri: '/' },
     ]

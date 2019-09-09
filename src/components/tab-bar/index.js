@@ -13,7 +13,7 @@ export class TabBar extends Component {
     }
 
     return (
-      <div className="tab-bar">
+      <div className="tab-bar fade-in--top">
         <Row gutter={8}>
           <Col span={6}>
             <Button>

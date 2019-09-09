@@ -1,7 +1,7 @@
 
-body {
-  background-color: #f7f7f7 !important;
-}
+// body {
+//   background-color: #f7f7f7 !important;
+// }
 .ant-layout {
   background: transparent !important;
 }
@@ -12,21 +12,24 @@ body {
 }
 .ant-page-header {
   padding: 17px 15px !important;
-  background: white;
+  background: transparent;
 }
 .ant-page-header-heading-title {
   font-size: 16px !important;
 }
-
+.headerpage {
+  background-color: white;
+}
 .section-header {
   text-align: center;
-  padding: 20px 0;
+  padding-bottom: 20px;
   font-size: 20px;
 }
 .section {
   background: white;
   padding: 20px;
   border-radius: 8px;
+  border: 1px solid #f7f7f7;
   &.ft {
     border-radius: 8px 8px 0 0
   }

@@ -5,6 +5,7 @@ import LayoutContent from '../components/layout';
 import Home from '../containers/home';
 import Profile from '../containers/profile';
 import CheckValoration from '../components/check-valoration';
+import VitalSigns from '../components/vital-signs';
 
 export class Routes extends Component {
   render () {
@@ -14,6 +15,7 @@ export class Routes extends Component {
       <LayoutContent path="/">
         <Profile path="/profile" />
         <CheckValoration path="check-valoration"/>
+        <VitalSigns path="vital-signs"/>
       </LayoutContent>
     </Router>
     )
