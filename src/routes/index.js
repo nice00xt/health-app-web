@@ -4,6 +4,7 @@ import { Router } from '@reach/router';
 import LayoutContent from '../components/layout';
 import Home from '../containers/home';
 import Profile from '../containers/profile';
+import CheckValoration from '../components/check-valoration';
 
 export class Routes extends Component {
   render () {
@@ -12,6 +13,7 @@ export class Routes extends Component {
       <Home path="/" />
       <LayoutContent path="/">
         <Profile path="/profile" />
+        <CheckValoration path="check-valoration"/>
       </LayoutContent>
     </Router>
     )

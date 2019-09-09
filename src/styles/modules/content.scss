@@ -2,6 +2,9 @@
 body {
   background-color: #f7f7f7 !important;
 }
+.ant-layout {
+  background: transparent !important;
+}
 .ant-layout-content {
   // background-color: #f7f7f7;
   padding: 0 15px;
@@ -10,4 +13,24 @@ body {
 .ant-page-header {
   padding: 17px 15px !important;
   background: white;
+}
+.ant-page-header-heading-title {
+  font-size: 16px !important;
+}
+
+.section-header {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 20px;
+}
+.section {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  &.ft {
+    border-radius: 8px 8px 0 0
+  }
+}
+.form-group {
+  margin: 10px 0;
 }

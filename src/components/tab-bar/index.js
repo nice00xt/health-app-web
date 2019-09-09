@@ -14,7 +14,7 @@ export class TabBar extends Component {
 
     return (
       <div className="tab-bar">
-        <Row align="center" gutter={8}>
+        <Row gutter={8}>
           <Col span={6}>
             <Button>
               <div className="tab-bar__button">
@@ -25,21 +25,21 @@ export class TabBar extends Component {
           <Col span={6}>
             <Button>
               <div className="tab-bar__button">
-                <Icon type="fund" style={iconStyles} theme="twoTone" />
+                <Icon type="fund" style={iconStyles} theme="twoTone" twoToneColor="#d6d6d6"/>
               </div>
             </Button>
           </Col>
           <Col span={6}>
             <Button>
               <div className="tab-bar__button">
-                <Icon type="medicine-box" style={iconStyles} theme="twoTone" />
+                <Icon type="medicine-box" style={iconStyles} theme="twoTone" twoToneColor="#d6d6d6"/>
               </div>
             </Button>
           </Col>
           <Col span={6}>
             <Button>
               <div className="tab-bar__button">
-                <Icon type="reconciliation" style={iconStyles} theme="twoTone" />
+                <Icon type="reconciliation" style={iconStyles} theme="twoTone" twoToneColor="#d6d6d6"/>
               </div>
             </Button>
           </Col>

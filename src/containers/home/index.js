@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import Logo from '../../images/logo.png';
+import { Link } from '@reach/router';
+import { map } from 'lodash';
 import {
   Row,
   Col,
   Layout,
-  PageHeader,
   Icon,
   Button
 } from 'antd';
@@ -16,7 +17,7 @@ export class Home extends Component {
       fontSize: '40px'
     }
     const options =[
-      { icon: 'schedule', title: 'Auto valoración', uri: '/' },
+      { icon: 'schedule', title: 'Auto valoración', uri: 'check-valoration' },
       { icon: 'fund', title: 'Signos vitales', uri: '/' },
       { icon: 'medicine-box', title: 'Medicamentos', uri: '/' },
       { icon: 'reconciliation', title: 'Salud educacional', uri: '/' },
@@ -31,16 +32,18 @@ export class Home extends Component {
         </div>
         <Content>
           <Row>
-            { options.map(({ icon, title, uri }) => {
+            { map(options, ({ icon, title, uri }, idx) => {
               return (
-              <Col span={12}>
+              <Col span={12} key={idx}>
                 <div className='main-box fade-in--top'>
-                  <Button>
-                    <div className='main-box__icon'>
-                      <Icon type={icon} style={iconStyles} theme="twoTone" twoToneColor="#f75275"/>
-                    </div>
-                    <span className="main-box__title">{ title }</span>
-                  </Button>
+                  <Link to={uri}>
+                    <Button>
+                      <div className='main-box__icon'>
+                        <Icon type={icon} style={iconStyles} theme="twoTone" twoToneColor="#f75275"/>
+                      </div>
+                      <span className="main-box__title">{ title }</span>
+                    </Button>
+                  </Link>
                 </div>
               </Col>
               )
