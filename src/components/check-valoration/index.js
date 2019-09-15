@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import { map } from 'lodash';
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 import {
   Row,
@@ -67,4 +69,14 @@ export const CheckValoration = () => {
   )
 }
 
-export default CheckValoration;
+const Questions = gql`
+  query {
+    Questions {
+      id
+      question
+      checked
+    }
+  }
+`
+
+export default graphql(Questions)(CheckValoration);
