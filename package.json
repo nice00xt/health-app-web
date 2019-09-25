@@ -2,6 +2,11 @@
   "name": "cardiapp-web",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "yarn": "1.6.0",
+    "node": "12.8.1",
+    "npm": "6.10.3"
+  },
   "dependencies": {
     "@reach/router": "^1.2.1",
     "chart.js": "^2.8.0",
