@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import {
   Row,
@@ -44,47 +44,45 @@ const questions = [
   { number: '7. ', text: 'Ha perdido el interés o el placer en su vida?' },
 ]
 
-export class ChartView extends Component {
-  render () {
-    return (
-      <Fragment>
-        <div className='header'>
-          <div className="fade-in">
-            <PageHeader
-              onBack={() => window.history.back()}
-              title="Autovaloración"
-            />
-          </div>
+export const ChartView = () => {
+  return (
+    <Fragment>
+      <div className='header'>
+        <div className="fade-in">
+          <PageHeader
+            onBack={() => window.history.back()}
+            title="Autovaloración"
+          />
         </div>
-        <Content className="fade-in">
-          <Row>
-            <Col span={24}>
-              <div className='section'>
-                <div className='chart-box'>
-                  <span className="chart-box__title">Septiembre - 2019</span>
-                  <Doughnut data={data} />
-                  <List
-                    header={<div>Lista de graficos</div>}
-                    bordered
-                    dataSource={questions}
-                    renderItem={item => (
-                      <List.Item>
-                        <div className='list-item'>
-                          <Typography.Text mark></Typography.Text> {item.number}
-                          <Typography.Text mark></Typography.Text> {item.text}
-                        </div>
-                      </List.Item>
-                    )}
-                  />
-                  <br />
-                </div>
+      </div>
+      <Content className="fade-in">
+        <Row>
+          <Col span={24}>
+            <div className='section'>
+              <div className='chart-box'>
+                <span className="chart-box__title">Septiembre - 2019</span>
+                <Doughnut data={data} />
+                <List
+                  header={<div>Lista de graficos</div>}
+                  bordered
+                  dataSource={questions}
+                  renderItem={item => (
+                    <List.Item>
+                      <div className='list-item'>
+                        <Typography.Text mark></Typography.Text> {item.number}
+                        <Typography.Text mark></Typography.Text> {item.text}
+                      </div>
+                    </List.Item>
+                  )}
+                />
+                <br />
               </div>
-            </Col>
-          </Row>
-        </Content>
-      </Fragment>
-    )
-  }
+            </div>
+          </Col>
+        </Row>
+      </Content>
+    </Fragment>
+  )
 }
 
 export default ChartView;

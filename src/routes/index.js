@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Router } from '@reach/router';
 
 import LayoutContent from '../components/layout';
@@ -9,9 +9,9 @@ import VitalSigns from '../components/vital-signs';
 import ChartView from '../components/chart-view';
 import ChartDetail from '../components/chart-view/chart-detail'
 
-export class Routes extends Component {
-  render () {
-    return (
+
+export const Routes = () => {
+  return (
     <Router>
       <Home path="/" />
       <LayoutContent path="/">
@@ -22,8 +22,7 @@ export class Routes extends Component {
         <ChartDetail path="chart-detail"/>
       </LayoutContent>
     </Router>
-    )
-  }
+  )
 }
 
 export default Routes;
