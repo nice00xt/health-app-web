@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export const fetchSongs = gql`
   {
@@ -20,19 +20,18 @@ export const fetchSong = gql`
 
 export const createSong = gql`
   mutation CreateSong($title: String) {
-    insert_songs(objects: {title: $title}) {
+    insert_songs(objects: { title: $title }) {
       returning {
         id
         title
       }
     }
   }
-`
+`;
+
 export const updateSong = gql`
   mutation UpdateSong($title: String, $id: Int!) {
-    update_songs(
-      where: {id: {_eq: $id}},
-      _set: {title: $title}) {
+    update_songs(where: { id: { _eq: $id } }, _set: { title: $title }) {
       returning {
         id
         title
@@ -43,7 +42,7 @@ export const updateSong = gql`
 
 export const deleteSong = gql`
   mutation DeleteSong($id: Int) {
-    delete_songs(where: {id: {_eq: $id}}) {
+    delete_songs(where: { id: { _eq: $id } }) {
       returning {
         id
         title
@@ -51,3 +50,23 @@ export const deleteSong = gql`
     }
   }
 `;
+
+
+
+export const ADDvaloration = gql`
+  mutation AddValoration($res1: Boolean, $res2: Boolean, $res3: Boolean, $res4: Boolean, $res5: Boolean, $res6: Boolean, $res7: Boolean) {
+    insert_valorations(objects: {res1: $res1, res2: $res2, res3: $res3, res4: $res4, res5: $res5, res6: $res6, res7: $res7}) {
+      returning {
+        created_at
+        id
+        res1
+        res2
+        res3
+        res4
+        res5
+        res6
+        res7
+      }
+    }
+  }
+`
