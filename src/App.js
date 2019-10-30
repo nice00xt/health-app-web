@@ -1,15 +1,14 @@
 import React from 'react';
 import Routes from './routes';
-
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
-
+import { initializeApp } from 'firebase/app';
+import { fbConfig } from './libs/firebase';
 import './styles/main.scss'
 import 'antd/dist/antd.css';
 
-const client = new ApolloClient({
-  uri: 'https://crdapp.herokuapp.com/v1/graphql'
-});
+initializeApp(fbConfig);
+const client = new ApolloClient({ uri: 'https://crdapp.herokuapp.com/v1/graphql' });
 
 export const App = () => {
   return (
