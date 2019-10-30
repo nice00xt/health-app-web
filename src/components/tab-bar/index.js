@@ -1,46 +1,52 @@
 import React from 'react';
+import { Link } from '@reach/router';
+import { map } from 'lodash';
 import {
   Row,
   Col,
   Icon,
-  Button
 } from 'antd';
 
-export const TabBar = () => {
-  const iconStyles = {
-    fontSize: '25px'
+const urlRoutes = [
+  { path: '/', icon: 'home' },
+  { path: '/check-valoration', icon: 'schedule' },
+  { path: '/vital-signs', icon: 'fund' },
+  { path: '/', icon: 'reconciliation' }
+]
+
+const renderButton = () => {
+  const isActive = ({ isCurrent }) => {
+    return isCurrent ? { className: "tab-bar__link active-tab" } : null
   }
+
+  return map(urlRoutes, ({ path, icon }, idx) => {
+    const iconStyles = { fontSize: '25px' }
+    const homeIcon = icon === "home";
+    return (
+      <Col span={6} key={idx}>
+        <Link
+          className={`tab-bar__link${homeIcon ? ' icon-home': ''}`}
+          to={path}
+          getProps={isActive}
+        >
+          <div className="tab-bar__button">
+            <Icon
+            type={icon}
+            style={iconStyles}
+            theme="twoTone"
+            twoToneColor="#f75476"/>
+          </div>
+        </Link>
+      </Col>
+    )
+  })
+}
+
+export const TabBar = () => {
   return (
     <div className="tab-bar fade-in--top">
       <Row gutter={8}>
-        <Col span={6}>
-          <Button>
-            <div className="tab-bar__button">
-              <Icon type="idcard" style={iconStyles} theme="twoTone" twoToneColor="#f75275"/>
-            </div>
-          </Button>
-        </Col>
-        <Col span={6}>
-          <Button>
-            <div className="tab-bar__button">
-              <Icon type="fund" style={iconStyles} theme="twoTone" twoToneColor="#d6d6d6"/>
-            </div>
-          </Button>
-        </Col>
-        <Col span={6}>
-          <Button>
-            <div className="tab-bar__button">
-              <Icon type="medicine-box" style={iconStyles} theme="twoTone" twoToneColor="#d6d6d6"/>
-            </div>
-          </Button>
-        </Col>
-        <Col span={6}>
-          <Button>
-            <div className="tab-bar__button">
-              <Icon type="reconciliation" style={iconStyles} theme="twoTone" twoToneColor="#d6d6d6"/>
-            </div>
-          </Button>
-        </Col>
+        { renderButton() }
       </Row>
     </div>
   )
