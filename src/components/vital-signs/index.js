@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { Link, navigate } from '@reach/router';
-import { Row, Col, Layout, PageHeader, Typography, Input, Button } from 'antd';
+import { Row, Col, Layout, PageHeader, Typography, Input, Button, message } from 'antd';
 import { useMutation } from '@apollo/react-hooks';
-import { addVitalSign } from '../../queries/signs';
+import { addVitalSign, fetchList } from '../../queries/signs';
 const { Content } = Layout;
 const { Text } = Typography;
 
@@ -14,6 +14,10 @@ const validations = Yup.object().shape({
   weight: Yup.string().required('required')
 });
 
+const success = () => {
+  message.success('Los datos han sido guardados', 2.5);
+};
+
 export const VitalSigns = () => {
   const [onAddVitalSign] = useMutation(addVitalSign);
 
@@ -22,7 +26,7 @@ export const VitalSigns = () => {
       <div className="header">
         <div className="fade-in">
           <PageHeader
-            onBack={() => window.history.back()}
+            onBack={() => navigate('/')}
             title="Signos Vitales"
           />
         </div>
@@ -30,6 +34,11 @@ export const VitalSigns = () => {
       <Content className="fade-in">
         <Row>
           <Col span={24}>
+            <Link
+              to="/vital-signs-list"
+            >
+              <span>Historial</span>
+            </Link>
             <Formik
               initialValues={{
                 heartRate: '',
@@ -43,11 +52,14 @@ export const VitalSigns = () => {
                   blood_pressure: bloodPressure,
                   weight
                 }
+
                 onAddVitalSign({
                   variables: { ...attr },
-                  // refetchQueries: [{ query: fetchSongs }]
+                  refetchQueries: [{ query: fetchList }]
                 }).then(() => {
                   setSubmitting(false);
+                  success();
+                  navigate('/vital-signs-list')
                 });
               }}
             >

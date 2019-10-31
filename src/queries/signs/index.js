@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const fecthList = gql`
+export const fetchList = gql`
   query VitalSignList {
     vitalsigns {
       blood_pressure
