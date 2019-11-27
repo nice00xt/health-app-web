@@ -1,6 +1,10 @@
 import React, { Fragment } from 'react';
 import { map } from 'lodash';
-
+import { Formik } from 'formik';
+// import { Link, navigate } from '@reach/router';
+import { questions, validations, initialValues } from './validation';
+import { useMutation } from '@apollo/react-hooks';
+import { ADDvaloration } from '../../queries/valorations';
 import {
   Row,
   Col,
@@ -8,30 +12,36 @@ import {
   PageHeader,
   Typography,
   Checkbox,
-  Button
+  Button,
+  message
 } from 'antd';
 const { Content } = Layout;
 const { Text } = Typography;
-const questions = [
-  { text: 'Siente fatiga, palpitaciones o ahogo con cualquier actividad fisica?' },
-  { text: 'Tiene hinchazon de las piernas?' },
-  { text: 'Siente fatiga, palpitaciones o ahogo estando sentado?' },
-  { text: 'Ha perdido la conciencia?' },
-  { text: 'Siente dolor en el pecho?' },
-  { text: 'Se siente triste, deprimido o deseperanzado?' },
-  { text: 'Ha perdido el interés o el placer en su vida?' },
-]
+
+const success = () => {
+  message.success('Los datos han sido guardados', 2.5);
+};
 
 export const CheckValoration = () => {
-  const onCheck = () => {
-    console.log('tetst')
-  }
+  const [hadnleAddValorations] = useMutation(ADDvaloration);
 
-  const renderQuestions = (questions) => {
-    return map(questions, ({ text }, idx) => {
+  const renderQuestions = (
+    questions,
+    values,
+    handleChange,
+    handleBlur,
+  ) => {
+    return map(questions, ({ text, name }, idx) => {
       return (
         <div className="form-group" key={idx}>
-          <Checkbox onChange={() => onCheck()}>{ text }</Checkbox>
+          <Checkbox
+            checked={values[name]}
+            name={name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          >
+            { text }
+          </Checkbox>
         </div>
       )
     })
@@ -50,16 +60,49 @@ export const CheckValoration = () => {
       <Content className="fade-in">
         <Row>
           <Col span={24}>
-            <form>
+          <Formik
+              initialValues={initialValues}
+              validationSchema={validations}
+              onSubmit={(values, { setSubmitting }) => {
+                hadnleAddValorations({
+                  variables: { ...values }
+                }).then(() => {
+                  setSubmitting(false)
+                  success()
+                })
+              }}
+            >
+              {({
+                handleSubmit,
+                values,
+                handleChange,
+                handleBlur,
+                isSubmitting
+              }) => (
+            <form onSubmit={handleSubmit}>
               <div className='section-header'>
                 <Text >Como te sientes hoy?</Text>
               </div>
               <div className='section ft'>
-                { renderQuestions(questions) }
+                { renderQuestions(
+                  questions,
+                  values,
+                  handleChange,
+                  handleBlur,
+                )}
                 <br />
               </div>
-                <Button type="primary" block>Guardar</Button>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  block={isSubmitting}
+                  loading={isSubmitting}
+                >
+                  Guardar
+                </Button>
             </form>
+            )}
+            </Formik>
           </Col>
         </Row>
       </Content>

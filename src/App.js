@@ -4,6 +4,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { initializeApp } from 'firebase/app';
 import { fbConfig } from './libs/firebase';
+import 'moment/locale/es'
 import './styles/main.scss'
 import 'antd/dist/antd.css';
 
