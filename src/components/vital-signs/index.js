@@ -36,6 +36,7 @@ export const VitalSigns = () => {
           <Col span={24}>
             <Link
               to="/vital-signs-list"
+              className='ant-btn'
             >
               <span>Historial</span>
             </Link>

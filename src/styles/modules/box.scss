@@ -1,9 +1,12 @@
 .header {
   text-align: center;
   padding: 20px 0;
-  background-color: #feedf1;
+  background-color: #1890ff;
   padding-bottom: 100px;
   margin-bottom: -85px;
+  &--white {
+    background-color: white;
+  }
 }
 .logo {
   width: 100px;
@@ -32,10 +35,9 @@
     flex-direction: column;
     align-items: center;
     display: flex;
-    background: white;
     border-radius: 12px;
     box-shadow: none;
-    border-radius: 100%;
+    background: #1890ff0f;
   }
 }
 .chart-box {

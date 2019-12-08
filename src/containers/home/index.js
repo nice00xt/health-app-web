@@ -26,7 +26,7 @@ const options =[
 export const Home = () => {
   return (
     <Fragment>
-      <div className='header'>
+      <div className='header header--white'>
         <img className="logo" src={Logo} alt=''/>
       </div>
       <Content>

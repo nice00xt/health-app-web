@@ -11,14 +11,23 @@
 .ant-layout-content {
   // background-color: #f7f7f7;
   padding: 0 15px;
-  padding-bottom: 30px;
+  overflow: scroll;
+  height: 80vh;
+  position: fixed;
+  form {
+    padding-bottom: 150px;
+  }
 }
 .ant-page-header {
-  padding: 17px 15px !important;
+  padding: 0 16px !important;
   background: transparent;
+  .ant-page-header-back {
+    .ant-page-header-back-button { color: white !important }
+  }
 }
 .ant-page-header-heading-title {
   font-size: 16px !important;
+  color: white !important;
 }
 .headerpage {
   background-color: white;
@@ -27,6 +36,10 @@
   text-align: center;
   padding-bottom: 20px;
   font-size: 20px;
+  padding-top: 20px;
+  span {
+    color: white;
+  }
 }
 .section {
   background: white;
@@ -54,4 +67,7 @@
   .anticon {
     margin-right: 10px;
   }
+}
+.link-green {
+  background-color: #52c41a !important;
 }
