@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
 
 export const validationSchema = Yup.object().shape({
-  res1: false,
-  res2: '',
+  res1: Yup.string().required('required'),
+  res2: Yup.string().required('required'),
   res3: Yup.string().required('required'),
   res4: Yup.string().required('required'),
   res5: Yup.string().required('required'),

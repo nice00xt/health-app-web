@@ -17,9 +17,9 @@ const iconStyles = {
 const options =[
   { icon: 'schedule', title: 'Auto valoración', uri: 'check-valoration' },
   { icon: 'fund', title: 'Signos vitales', uri: 'vital-signs' },
-  { icon: 'medicine-box', title: 'Medicamentos', uri: '/' },
-  { icon: 'reconciliation', title: 'Depresión', uri: '/' },
-  { icon: 'pie-chart', title: 'Graficos', uri: 'chart-view' },
+  { icon: 'reconciliation', title: 'Depresión', uri: 'depression' },
+  // { icon: 'medicine-box', title: 'Medicamentos', uri: '/' },
+  // { icon: 'pie-chart', title: 'Graficos', uri: 'chart-view' },
   { icon: 'idcard', title: 'Perfil', uri: '/' },
 ]
 

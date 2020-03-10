@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
+import { navigate } from '@reach/router';
 import { useFormik } from 'formik';
 import { compose, withState, withHandlers } from 'recompose';
-import { questions, validationSchema, initialValues } from './validation';
-// import { useMutation } from '@apollo/react-hooks';
-// import { ADDvaloration } from '../../queries/valorations';
-import { navigate } from '@reach/router';
 import { Button, Modal } from 'antd';
+import { questionsSecond, validationSchemaSecond, initialValuesSecond } from './validation';
+// import { useMutation } from '@apollo/react-hooks';
+// import { ADDdepressionFirst } from '../../queries/depression';
 import HeaderView from '../../components/header-view';
 import Question from '../../components/question';
-import { SuccessMessage, MessageAlert, MessageWarning } from './result';
+import { SuccessMessage, MessageAlert } from './result';
 
 const enhance = compose(
   withState('step', 'setStep', 1),
@@ -18,22 +18,19 @@ const enhance = compose(
   })
 );
 
-export const CheckValoration = ({ step, nextStep, backStep }) => {
-  // const [hadnleAddValorations] = useMutation(ADDvaloration);
+export const DepressionSecond = ({ step, nextStep, backStep }) => {
+  // const [hadnleAddDepressionFirst] = useMutation(ADDdepressionFirst);
   const [visible, openModal] = useState(false);
   const [resultMessage, setResult] = useState({
     success: false,
-    warning: false,
     alert: false
   });
 
   const handleRedirect = (result) => {
-    if (result >= 6) {
-      setResult({ warning: true })
+    if (result >= 1) {
+      setResult({ alert: true });
     } else if (result === 0) {
       setResult({ success: true });
-    } else if (result >= 1) {
-      setResult({ alert: true })
     }
     openModal(true);
   };
@@ -44,28 +41,32 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
   }
 
   const formik = useFormik({
-    initialValues,
-    validationSchema,
+    initialValues: initialValuesSecond,
+    validationSchema: validationSchemaSecond,
     onSubmit: (values, { setSubmitting }) => {
       const result = Object.values(values).filter(item => item === true).length;
       handleRedirect(result);
       setSubmitting(false);
     }
   });
-  const { handleSubmit, isSubmitting, setFieldValue } = formik;
-  const { success, warning, alert } = resultMessage;
+
+  const {
+    handleSubmit,
+    isSubmitting,
+    setFieldValue
+  } = formik;
+  const { success, alert } = resultMessage;
   return (
     <HeaderView
-      headerTitle="Auto Valoración"
+      headerTitle="Depresión"
       contentTitle="Como te sientes hoy?"
     >
-      <Modal
+    <Modal
         visible={visible}
         onCancel={() => closeModal()}
         footer={null}
       >
         { success && <SuccessMessage /> }
-        { warning && <MessageWarning /> }
         { alert && <MessageAlert /> }
       </Modal>
       <form onSubmit={handleSubmit}>
@@ -73,8 +74,8 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
           {{
             1: (
               <Question
-                text={questions[0].text}
-                name={questions[0].name}
+                text={questionsSecond[0].text}
+                name={questionsSecond[0].name}
                 nextStep={nextStep}
                 backStep={backStep}
                 setFieldValue={setFieldValue}
@@ -83,8 +84,8 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
             ),
             2: (
               <Question
-                text={questions[1].text}
-                name={questions[1].name}
+                text={questionsSecond[1].text}
+                name={questionsSecond[1].name}
                 nextStep={nextStep}
                 backStep={backStep}
                 setFieldValue={setFieldValue}
@@ -92,8 +93,8 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
             ),
             3: (
               <Question
-                text={questions[2].text}
-                name={questions[2].name}
+                text={questionsSecond[2].text}
+                name={questionsSecond[2].name}
                 nextStep={nextStep}
                 backStep={backStep}
                 setFieldValue={setFieldValue}
@@ -101,8 +102,8 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
             ),
             4: (
               <Question
-                text={questions[3].text}
-                name={questions[3].name}
+                text={questionsSecond[3].text}
+                name={questionsSecond[3].name}
                 nextStep={nextStep}
                 backStep={backStep}
                 setFieldValue={setFieldValue}
@@ -110,31 +111,13 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
             ),
             5: (
               <Question
-                text={questions[4].text}
-                name={questions[4].name}
+                text={questionsSecond[4].text}
+                name={questionsSecond[4].name}
                 nextStep={nextStep}
                 backStep={backStep}
                 setFieldValue={setFieldValue}
               />
             ),
-            6: (
-              <Question
-                text={questions[5].text}
-                name={questions[5].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-            7: (
-              <Question
-                text={questions[6].text}
-                name={questions[6].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            )
           }[step] || (
             <Button
               type="primary"
@@ -152,4 +135,4 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
   );
 };
 
-export default enhance(CheckValoration);
+export default enhance(DepressionSecond);

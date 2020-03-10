@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
+import { navigate } from '@reach/router';
 import { useFormik } from 'formik';
 import { compose, withState, withHandlers } from 'recompose';
+import { Button, Modal } from 'antd';
 import { questions, validationSchema, initialValues } from './validation';
 // import { useMutation } from '@apollo/react-hooks';
-// import { ADDvaloration } from '../../queries/valorations';
-import { navigate } from '@reach/router';
-import { Button, Modal } from 'antd';
+// import { ADDdepressionFirst } from '../../queries/depression';
 import HeaderView from '../../components/header-view';
 import Question from '../../components/question';
-import { SuccessMessage, MessageAlert, MessageWarning } from './result';
+import { SuccessMessage, MessageAlert } from './result';
 
 const enhance = compose(
   withState('step', 'setStep', 1),
@@ -18,24 +18,21 @@ const enhance = compose(
   })
 );
 
-export const CheckValoration = ({ step, nextStep, backStep }) => {
-  // const [hadnleAddValorations] = useMutation(ADDvaloration);
+export const Depression = ({ step, nextStep, backStep }) => {
+  // const [hadnleAddDepressionFirst] = useMutation(ADDdepressionFirst);
   const [visible, openModal] = useState(false);
   const [resultMessage, setResult] = useState({
     success: false,
-    warning: false,
     alert: false
   });
 
   const handleRedirect = (result) => {
-    if (result >= 6) {
-      setResult({ warning: true })
+    if (result >= 1) {
+      navigate('second-part');
     } else if (result === 0) {
+      openModal(true);
       setResult({ success: true });
-    } else if (result >= 1) {
-      setResult({ alert: true })
     }
-    openModal(true);
   };
 
   const closeModal = () => {
@@ -52,20 +49,24 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
       setSubmitting(false);
     }
   });
-  const { handleSubmit, isSubmitting, setFieldValue } = formik;
-  const { success, warning, alert } = resultMessage;
+
+  const {
+    handleSubmit,
+    isSubmitting,
+    setFieldValue
+  } = formik;
+  const { success, alert } = resultMessage;
   return (
     <HeaderView
-      headerTitle="Auto Valoración"
+      headerTitle="Depresión"
       contentTitle="Como te sientes hoy?"
     >
-      <Modal
+    <Modal
         visible={visible}
         onCancel={() => closeModal()}
         footer={null}
       >
         { success && <SuccessMessage /> }
-        { warning && <MessageWarning /> }
         { alert && <MessageAlert /> }
       </Modal>
       <form onSubmit={handleSubmit}>
@@ -108,33 +109,6 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
                 setFieldValue={setFieldValue}
               />
             ),
-            5: (
-              <Question
-                text={questions[4].text}
-                name={questions[4].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-            6: (
-              <Question
-                text={questions[5].text}
-                name={questions[5].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-            7: (
-              <Question
-                text={questions[6].text}
-                name={questions[6].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            )
           }[step] || (
             <Button
               type="primary"
@@ -142,7 +116,7 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
               block={isSubmitting}
               loading={isSubmitting}
             >
-              Terminar
+              Seguiente
             </Button>
           )}
           <br />
@@ -152,4 +126,4 @@ export const CheckValoration = ({ step, nextStep, backStep }) => {
   );
 };
 
-export default enhance(CheckValoration);
+export default enhance(Depression);
