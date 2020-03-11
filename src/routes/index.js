@@ -16,8 +16,8 @@ import ChartDetail from '../components/chart-view/chart-detail'
 export const Routes = () => {
   return (
     <Router>
-      <Home path="/" />
       <LayoutContent path="/">
+        <Home path="/" />
         <Profile path="/profile" />
         <CheckValoration path="check-valoration"/>
         <Depression path='depression' />

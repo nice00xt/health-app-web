@@ -11,7 +11,7 @@ const urlRoutes = [
   { path: '/', icon: 'home' },
   { path: '/check-valoration', icon: 'schedule' },
   { path: '/vital-signs', icon: 'fund' },
-  { path: '/', icon: 'reconciliation' }
+  { path: '/profile', icon: 'reconciliation' }
 ]
 
 const renderButton = () => {

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { compose, withState, withHandlers } from 'recompose';
 import { questions, validationSchema, initialValues } from './validation';
-// import { useMutation } from '@apollo/react-hooks';
-// import { ADDvaloration } from '../../queries/valorations';
+import { useMutation } from '@apollo/react-hooks';
+import { ADDvaloration } from '../../queries/valorations';
 import { navigate } from '@reach/router';
 import { Button, Modal } from 'antd';
 import HeaderView from '../../components/header-view';
@@ -19,21 +19,35 @@ const enhance = compose(
 );
 
 export const CheckValoration = ({ step, nextStep, backStep }) => {
-  // const [hadnleAddValorations] = useMutation(ADDvaloration);
+  const [hadnleAddValorations] = useMutation(ADDvaloration);
   const [visible, openModal] = useState(false);
   const [resultMessage, setResult] = useState({
     success: false,
     warning: false,
-    alert: false
+    alert: false,
+    loading: false
   });
 
   const handleRedirect = (result) => {
+    setResult({ loading: true });
     if (result >= 6) {
-      setResult({ warning: true })
+      hadnleAddValorations({
+        variables: { status: 3 }
+      }).then(() => {
+        setResult({ warning: true, loading: false });
+      })
     } else if (result === 0) {
-      setResult({ success: true });
+      hadnleAddValorations({
+        variables: { status: 1 }
+      }).then(() => {
+        setResult({ success: true, loading: false });
+      })
     } else if (result >= 1) {
-      setResult({ alert: true })
+      hadnleAddValorations({
+        variables: { status: 2 }
+      }).then(() => {
+        setResult({ alert: true, loading: false });
+      })
     }
     openModal(true);
   };

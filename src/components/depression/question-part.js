@@ -4,8 +4,8 @@ import { useFormik } from 'formik';
 import { compose, withState, withHandlers } from 'recompose';
 import { Button, Modal } from 'antd';
 import { questionsSecond, validationSchemaSecond, initialValuesSecond } from './validation';
-// import { useMutation } from '@apollo/react-hooks';
-// import { ADDdepressionFirst } from '../../queries/depression';
+import { useMutation } from '@apollo/react-hooks';
+import { ADDdepression } from '../../queries/depression';
 import HeaderView from '../../components/header-view';
 import Question from '../../components/question';
 import { SuccessMessage, MessageAlert } from './result';
@@ -19,7 +19,7 @@ const enhance = compose(
 );
 
 export const DepressionSecond = ({ step, nextStep, backStep }) => {
-  // const [hadnleAddDepressionFirst] = useMutation(ADDdepressionFirst);
+  const [hadnleADDdepression] = useMutation(ADDdepression);
   const [visible, openModal] = useState(false);
   const [resultMessage, setResult] = useState({
     success: false,
@@ -29,8 +29,14 @@ export const DepressionSecond = ({ step, nextStep, backStep }) => {
   const handleRedirect = (result) => {
     if (result >= 1) {
       setResult({ alert: true });
+      hadnleADDdepression({
+        variables: { status: 3 }
+      });
     } else if (result === 0) {
       setResult({ success: true });
+      hadnleADDdepression({
+        variables: { status: 2 }
+      });
     }
     openModal(true);
   };
