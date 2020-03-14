@@ -4,15 +4,12 @@ import {
   Col,
   Layout,
   PageHeader,
-  Typography,
 } from 'antd';
 const { Content } = Layout;
-const { Text } = Typography;
 
 export const HeaderView = ({
   children,
   headerTitle,
-  contentTitle
 }) => {
   return (
     <Fragment>
@@ -27,9 +24,6 @@ export const HeaderView = ({
       <Content className="fade-in">
         <Row>
           <Col span={24}>
-            <div className='section-header'>
-              <Text>{contentTitle}</Text>
-            </div>
             { children }
           </Col>
         </Row>

@@ -2,8 +2,8 @@
   text-align: center;
   padding: 20px 0;
   background-color: #1890ff;
-  padding-bottom: 100px;
-  margin-bottom: -85px;
+  // padding-bottom: 100px;
+  // margin-bottom: -85px;
   &--white {
     background-color: white;
   }
@@ -18,9 +18,10 @@
   &__title {
     margin-left: 0 !important;
     font-weight: bold;
-    color: #b1acac;
+    color: #fbfbfb;
     font-weight: 500;
     margin-top: 10px;
+    font-size: 1.2rem;
   }
   &__icon {
     border-radius: 100%;
@@ -37,11 +38,12 @@
     display: flex;
     border-radius: 12px;
     box-shadow: none;
-    background: #1890ff0f;
+    background: #1890ff;
   }
 }
 .chart-box {
   text-align: center;
+  text-transform: capitalize;
   &__title {
     margin-bottom: 15px;
     display: block;
