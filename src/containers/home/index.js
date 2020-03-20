@@ -24,6 +24,10 @@ const options =[
 ]
 
 export const Home = () => {
+  const iconStyle = {
+    color: '#ffffff',
+    fontSize: 35
+  }
   return (
     <Fragment>
       <div className='header header--white'>
@@ -38,7 +42,7 @@ export const Home = () => {
                 <Link to={uri}>
                   <Button>
                     <div className='main-box__icon'>
-                      <Icon type={icon} style={iconStyles} theme="twoTone" twoToneColor="#f75275"/>
+                      <Icon type={icon} style={iconStyles} style={iconStyle}/>
                     </div>
                     <span className="main-box__title">{ title }</span>
                   </Button>

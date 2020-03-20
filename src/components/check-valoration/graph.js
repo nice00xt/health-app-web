@@ -20,10 +20,33 @@ export const GraphView = ({ loading, data }) => {
     const medium = filter(formated, { status: 2, date: 'marzo' });
     const bad = filter(formated, { status: 3, date: 'marzo' });
     // console.log(filterList.length)
+
+    const percent = (text, n) => {
+      const total = good.length + medium.length + bad.length;
+      const percent = (n / total) * 100;
+
+      return `${text}: ${percent.toFixed(1)}%`;
+    }
+    const options = {
+      legend: {
+        labels: {
+          fontSize: 18
+        },
+        position: 'bottom'
+      },
+      tooltips: {
+        enabled: false,
+        bodyFontSize: 20,
+        footerFontStyle: 'bold'
+      }
+    }
     const mock = {
-      labels: ['Compensado', 'Afección Piscosocial', 'Descompensado'],
+      labels: [
+        percent('Compensado', good.length),
+        percent('Afección Piscosocial', medium.length),
+        percent('Descompensado', bad.length)
+      ],
       datasets: [{
-          label: '# of Votes',
           data: [good.length, medium.length, bad.length],
           backgroundColor: [
             'rgba(82, 196, 26, 0.7)',
@@ -46,6 +69,7 @@ export const GraphView = ({ loading, data }) => {
           data={mock}
           width={500}
           height={500}
+          options={options}
         />
         <br />
       </div>

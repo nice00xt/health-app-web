@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
 import moment from 'moment';
 import { orderBy } from 'lodash';
-import { navigate } from '@reach/router';
 import { useQuery } from '@apollo/react-hooks';
 import { fetchList } from '../../queries/signs';
-import { Layout, PageHeader, List, Spin, Card } from 'antd';
-const { Content } = Layout;
+import { List, Spin, Card } from 'antd';
 
 const renderList = ({ vitalsigns }) => {
   const orderDate = orderBy(vitalsigns, e => new Date(e.created_at), ['desc']);
@@ -31,19 +29,9 @@ export const VitalSignsList = () => {
 
   return (
     <Fragment>
-      <div className="header">
-        <div className="fade-in">
-          <PageHeader
-            onBack={() => navigate('/')}
-            title="Historial > Signos Vitales"
-          />
-        </div>
+      <div className='scroll-list'>
+        { loading ? <Spin /> : renderList(data) }
       </div>
-      <Content className="fade-in">
-        <div className='scroll-list'>
-          { loading ? <Spin /> : renderList(data) }
-        </div>
-      </Content>
     </Fragment>
   )
 }
