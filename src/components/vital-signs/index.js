@@ -1,12 +1,13 @@
 import React from 'react';
 // import { useQuery } from '@apollo/react-hooks';
 // import { fetchValorations } from '../../queries/valorations';
-import { Tabs, Icon } from 'antd';
+import { Tabs, Icon, Layout } from 'antd';
 import HeaderView from '../../components/header-view';
 import VitalSignsList from './list';
 import VitalSignForm from './vitalsign-form';
 
 const { TabPane } = Tabs;
+const { Content } = Layout;
 export const VitalSigns = () => {
   // const { loading, data } = useQuery(fetchValorations);
 
@@ -22,20 +23,24 @@ export const VitalSigns = () => {
           </span>
         }
       >
-        <VitalSignForm />
+        <Content>
+          <VitalSignForm />
+        </Content>
       </TabPane>
       <TabPane
         key="2"
         tab={
-          <span>
+          <div>
             <Icon type="bars" />
             Historial
-          </span>
+          </div>
         }
       >
-        <VitalSignsList />
+        <Content>
+          <VitalSignsList />
+        </Content>
       </TabPane>
-      <TabPane
+      {/* <TabPane
         key="3"
         tab={
           <span>
@@ -44,8 +49,10 @@ export const VitalSigns = () => {
           </span>
         }
       >
-        <span>Grafica</span>
-      </TabPane>
+        <Content>
+          <span>Grafica</span>
+        </Content>
+      </TabPane> */}
     </Tabs>
     </HeaderView>
   )

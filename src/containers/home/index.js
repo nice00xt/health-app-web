@@ -25,7 +25,7 @@ const options =[
 
 export const Home = () => {
   const iconStyle = {
-    color: '#ffffff',
+    color: '#f75476',
     fontSize: 35
   }
   return (

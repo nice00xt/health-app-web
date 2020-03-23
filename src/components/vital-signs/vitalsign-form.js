@@ -23,19 +23,18 @@ export const VitalSignForm = () => {
     initialValues,
     validationSchema,
     onSubmit: ({ heartRate, bloodPressure, weight }, { setSubmitting }) => {
-      // const attr = {
-      //   heart_rate: heartRate,
-      //   blood_pressure: bloodPressure,
-      //   weight
-      // }
-      // onAddVitalSign({
-      //   variables: { ...attr },
-      //   refetchQueries: [{ query: fetchList }]
-      // }).then(() => {
-      //   setSubmitting(false);
-      //   success();
-      // });
-      console.log(values)
+      const attr = {
+        heart_rate: heartRate,
+        blood_pressure: bloodPressure,
+        weight
+      }
+      onAddVitalSign({
+        variables: { ...attr },
+        refetchQueries: [{ query: fetchList }]
+      }).then(() => {
+        setSubmitting(false);
+        success();
+      });
     }
   });
   const { handleSubmit, isSubmitting, values, handleChange, handleBlur } = formik;

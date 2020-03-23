@@ -3,9 +3,8 @@ import {
   Row,
   Col,
   Layout,
-  PageHeader,
+  Icon
 } from 'antd';
-const { Content } = Layout;
 
 export const HeaderView = ({
   children,
@@ -13,21 +12,17 @@ export const HeaderView = ({
 }) => {
   return (
     <Fragment>
-      <div className='header'>
-        <div className="fade-in">
-          <PageHeader
-            onBack={() => window.history.back()}
-            title={headerTitle}
-          />
+      <div className='header fade-in'>
+        <div className="header__back" onClick={() => window.history.back()}>
+          <Icon type='arrow-left' style={{ color: '#f75476', fontSize: 18 }}/>
         </div>
+        <span className="header__title">{headerTitle}</span>
       </div>
-      <Content className="fade-in">
         <Row>
           <Col span={24}>
             { children }
           </Col>
         </Row>
-      </Content>
     </Fragment>
   )
 }

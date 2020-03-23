@@ -79,11 +79,11 @@ export const CheckValorationForm = ({ step, nextStep, backStep }) => {
         { warning && <MessageWarning /> }
         { alert && <MessageAlert /> }
       </Modal>
-      <div className='section-header'>
-        <Text>Como te sientes hoy?</Text>
-      </div>
       <form onSubmit={handleSubmit}>
         <div className="section ft">
+          <div className='section-header'>
+            <Text>Como te sientes hoy?</Text>
+          </div>
           {{
             1: (
               <Question

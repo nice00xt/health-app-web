@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { Tabs, Icon } from 'antd';
+import { Tabs, Icon, Layout } from 'antd';
 
 import { fetchValorations } from '../../queries/valorations';
 import HeaderView from '../../components/header-view';
@@ -8,6 +8,7 @@ import CheckValorationForm from './valoration-form';
 import GraphView from './graph';
 
 const { TabPane } = Tabs;
+const  { Content } = Layout;
 export const CheckValoration = () => {
   const { loading, data } = useQuery(fetchValorations);
 
@@ -26,7 +27,9 @@ export const CheckValoration = () => {
           </span>
         }
       >
-        <CheckValorationForm />
+        <Content>
+          <CheckValorationForm />
+        </Content>
       </TabPane>
       <TabPane
         key="2"
@@ -37,7 +40,9 @@ export const CheckValoration = () => {
           </span>
         }
       >
-        <GraphView loading={loading} data={data}/>
+        <Content>
+          <GraphView loading={loading} data={data}/>
+        </Content>
       </TabPane>
     </Tabs>
     </HeaderView>

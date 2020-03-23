@@ -20,7 +20,9 @@ const renderButton = () => {
   }
 
   return map(urlRoutes, ({ path, icon }, idx) => {
-    const iconStyles = { fontSize: '25px' }
+    const iconStyles = {
+      fontSize: '25px'
+    }
     const homeIcon = icon === "home";
     return (
       <Col span={6} key={idx}>
@@ -32,9 +34,7 @@ const renderButton = () => {
           <div className="tab-bar__button">
             <Icon
             type={icon}
-            style={iconStyles}
-            theme="twoTone"
-            twoToneColor="#f75476"/>
+            style={iconStyles}/>
           </div>
         </Link>
       </Col>
