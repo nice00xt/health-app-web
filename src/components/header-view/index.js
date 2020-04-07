@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import {
   Row,
   Col,
-  Layout,
   Icon
 } from 'antd';
 

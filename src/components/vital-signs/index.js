@@ -1,6 +1,4 @@
 import React from 'react';
-// import { useQuery } from '@apollo/react-hooks';
-// import { fetchValorations } from '../../queries/valorations';
 import { Tabs, Icon, Layout } from 'antd';
 import HeaderView from '../../components/header-view';
 import VitalSignsList from './list';
@@ -9,7 +7,6 @@ import VitalSignForm from './vitalsign-form';
 const { TabPane } = Tabs;
 const { Content } = Layout;
 export const VitalSigns = () => {
-  // const { loading, data } = useQuery(fetchValorations);
 
   return (
     <HeaderView headerTitle="Signos Vitales">

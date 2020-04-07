@@ -4,6 +4,7 @@ import { Router } from '@reach/router';
 import LayoutContent from '../components/layout';
 import Home from '../containers/home';
 import Profile from '../containers/profile';
+import Dashboard from '../containers/dashboard';
 import CheckValoration from '../components/check-valoration';
 import Depression from '../components/depression';
 import DepressionSecond from '../components/depression/question-part';
@@ -12,6 +13,9 @@ import VitalSignsList from '../components/vital-signs/list';
 import ChartView from '../components/chart-view';
 import ChartDetail from '../components/chart-view/chart-detail'
 
+import DashboardLayout from '../components/layout/dashboard-layout';
+import UserView from '../components/dashboard/user-view';
+import ListView from '../components/dashboard/medicine-list/list-view';
 
 export const Routes = () => {
   return (
@@ -27,6 +31,11 @@ export const Routes = () => {
         <ChartView path="chart-view" />
         <ChartDetail path="chart-detail"/>
       </LayoutContent>
+      <DashboardLayout path="admin/">
+        <Dashboard path='/'/>
+        <UserView path='user-view' />
+        <ListView path='list-view'/>
+      </DashboardLayout>
     </Router>
   )
 }

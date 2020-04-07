@@ -19,9 +19,10 @@ export const Question = ({ setFieldValue, text, name, nextStep, backStep, first 
         <span className='question__title'>{text}</span>
         <div className='question__buttons'>
           <Button
-            type="dashed"
+            type="primary"
             onClick={() => handleConfirm(false)}
             size='large'
+            ghost
           >
             NO
           </Button>

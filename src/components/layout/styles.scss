@@ -1,0 +1,31 @@
+#root {
+  height: 100%;
+}
+.logo-dashaboard {
+  width: 100%;
+  color: white;
+  font-size: 20px;
+  width: 100% !important;
+  padding: 20px;
+}
+.ant-layout-content {
+  margin: 0;
+  height: 100% !important;
+}
+.inner {
+  padding: 24px;
+  background: #fff;
+  min-height: 360px;
+}
+.ant-layout-sider {
+  height: 100%;
+}
+
+.dashboard-layout {
+  height: 100%;
+  display: flex;
+}
+.App {
+  height: 100%;
+  display: grid;
+}

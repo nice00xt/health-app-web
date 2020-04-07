@@ -12,7 +12,8 @@ import {
 const { Content } = Layout;
 
 const iconStyles = {
-  fontSize: '40px'
+  color: '#f75476',
+  fontSize: 40
 }
 const options =[
   { icon: 'schedule', title: 'Auto valoración', uri: 'check-valoration' },
@@ -24,10 +25,6 @@ const options =[
 ]
 
 export const Home = () => {
-  const iconStyle = {
-    color: '#f75476',
-    fontSize: 35
-  }
   return (
     <Fragment>
       <div className='header header--white'>
@@ -42,7 +39,7 @@ export const Home = () => {
                 <Link to={uri}>
                   <Button>
                     <div className='main-box__icon'>
-                      <Icon type={icon} style={iconStyles} style={iconStyle}/>
+                      <Icon type={icon} style={iconStyles} />
                     </div>
                     <span className="main-box__title">{ title }</span>
                   </Button>
