@@ -1,17 +1,10 @@
 import React, { Fragment } from 'react';
-import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { validationSchema, initialValues } from './validations';
 import { Typography, Input, Button, message } from 'antd';
 import { useMutation } from '@apollo/react-hooks';
-import { addVitalSign, fetchList } from '../../queries/signs';
+import { addVitalSign } from '../../queries/signs';
 const { Text } = Typography;
-
-const validations = Yup.object().shape({
-  heartRate: Yup.string().required('required'),
-  bloodPressure: Yup.string().required('required'),
-  weight: Yup.string().required('required')
-});
 
 const success = () => {
   message.success('Los datos han sido guardados', 2.5);
@@ -30,7 +23,6 @@ export const VitalSignForm = () => {
       }
       onAddVitalSign({
         variables: { ...attr },
-        refetchQueries: [{ query: fetchList }]
       }).then(() => {
         setSubmitting(false);
         success();

@@ -19,7 +19,6 @@ export const GraphView = ({ loading, data }) => {
     const good = filter(formated, { status: 1, date: 'marzo' });
     const medium = filter(formated, { status: 2, date: 'marzo' });
     const bad = filter(formated, { status: 3, date: 'marzo' });
-    // console.log(filterList.length)
 
     const percent = (text, n) => {
       const total = good.length + medium.length + bad.length;

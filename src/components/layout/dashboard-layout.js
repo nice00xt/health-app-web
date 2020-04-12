@@ -11,15 +11,9 @@ export const DashboardLayout = ({ children }) => {
           <Sider
             breakpoint="lg"
             collapsedWidth="0"
-            onBreakpoint={broken => {
-              console.log(broken);
-            }}
-            onCollapse={(collapsed, type) => {
-              console.log(collapsed, type);
-            }}
           >
             <div className="logo-dashaboard">
-              Cardiapp Admin
+              Cardiapp
             </div>
             <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
               <Menu.Item key="1">

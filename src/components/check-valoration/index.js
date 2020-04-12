@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useSubscription } from '@apollo/react-hooks';
 import { Tabs, Icon, Layout } from 'antd';
 
 import { fetchValorations } from '../../queries/valorations';
@@ -10,7 +10,7 @@ import GraphView from './graph';
 const { TabPane } = Tabs;
 const  { Content } = Layout;
 export const CheckValoration = () => {
-  const { loading, data } = useQuery(fetchValorations);
+  const { loading, data } = useSubscription(fetchValorations);
 
   return (
     <HeaderView
