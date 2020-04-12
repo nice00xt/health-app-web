@@ -9,6 +9,7 @@ import { Button, Modal, Typography } from 'antd';
 import Question from '../../components/question';
 import { SuccessMessage, MessageAlert, MessageWarning } from './result';
 
+
 const { Text } = Typography;
 const enhance = compose(
   withState('step', 'setStep', 1),
@@ -80,10 +81,8 @@ export const CheckValorationForm = ({ step, nextStep, backStep }) => {
         { alert && <MessageAlert /> }
       </Modal>
       <form onSubmit={handleSubmit}>
-        <div className="section ft">
-          <div className='section-header'>
-            <Text>Como te sientes hoy?</Text>
-          </div>
+        <div className="section ft fade-in--top">
+
           {{
             1: (
               <Question

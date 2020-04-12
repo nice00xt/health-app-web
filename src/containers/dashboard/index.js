@@ -6,9 +6,6 @@ import './styles.scss';
 import { List } from 'antd';
 const data = [
   'Usuario 1',
-  'Usuario 2',
-  'Usuario 3',
-  'Usuario 4'
 ];
 
 export const Dashboard = () => {

@@ -23,7 +23,7 @@ export const CheckValoration = () => {
         tab={
           <span>
             <Icon type="snippets" />
-            Formulario
+            Preguntas
           </span>
         }
       >

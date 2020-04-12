@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fetchDepression = gql`
-  query DepressionList {
+  subscription Depression {
     depression {
       id
       status

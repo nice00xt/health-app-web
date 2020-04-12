@@ -58,7 +58,7 @@ export const ChartView = () => {
       <Content className="fade-in">
         <Row>
           <Col span={24}>
-            <div className='section'>
+            <div className='section fade-in--top'>
               <div className='chart-box'>
                 <span className="chart-box__title">Septiembre - 2019</span>
                 <Doughnut data={data} />

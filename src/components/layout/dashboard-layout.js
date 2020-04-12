@@ -11,6 +11,12 @@ export const DashboardLayout = ({ children }) => {
           <Sider
             breakpoint="lg"
             collapsedWidth="0"
+            // onBreakpoint={broken => {
+            //   isMobile = broken
+            // }}
+            // onCollapse={(collapsed, type) => {
+            //   // console.log(collapsed, type);
+            // }}
           >
             <div className="logo-dashaboard">
               Cardiapp

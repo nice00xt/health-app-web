@@ -76,7 +76,7 @@ export const DepressionSecond = ({ step, nextStep, backStep }) => {
         { alert && <MessageAlert /> }
       </Modal>
       <form onSubmit={handleSubmit}>
-        <div className="section ft">
+        <div className="section ft fade-in--top">
           {{
             1: (
               <Question

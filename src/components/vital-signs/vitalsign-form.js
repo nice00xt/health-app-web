@@ -37,7 +37,7 @@ export const VitalSignForm = () => {
         <div className="section-header">
           <Text>Ingresa tus resultados</Text>
         </div>
-        <div className="section ft">
+        <div className="section ft fade-in--top">
           <div className="form-group">
             <Text>Frecuencia cardíaca</Text>
             <Input

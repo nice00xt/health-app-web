@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const fetchList = gql`
-  query VitalSignList {
+  subscription VitalSign {
     vitalsigns {
       blood_pressure
       created_at

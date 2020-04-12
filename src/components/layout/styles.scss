@@ -13,14 +13,17 @@
   height: 100% !important;
 }
 .inner {
-  padding: 24px;
   background: #fff;
   min-height: 360px;
+  width: 83%;
+}
+.inner-break {
+  @extend .inner;
+  width: 100% !important;
 }
 .ant-layout-sider {
   height: 100%;
 }
-
 .dashboard-layout {
   height: 100%;
   display: flex;

@@ -16,6 +16,7 @@ import ChartDetail from '../components/chart-view/chart-detail'
 import DashboardLayout from '../components/layout/dashboard-layout';
 import UserView from '../components/dashboard/user-view';
 import ListView from '../components/dashboard/medicine-list/list-view';
+import MedicineView from '../components/medicine-view';
 
 export const Routes = () => {
   return (
@@ -30,6 +31,7 @@ export const Routes = () => {
         <VitalSignsList path="vital-signs-list"/>
         <ChartView path="chart-view" />
         <ChartDetail path="chart-detail"/>
+        <MedicineView path='medicine-view' />
       </LayoutContent>
       <DashboardLayout path="admin/">
         <Dashboard path='/'/>

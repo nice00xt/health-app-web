@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { navigate } from '@reach/router';
 import { useFormik } from 'formik';
 import { compose, withState, withHandlers } from 'recompose';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Layout } from 'antd';
 import { questions, validationSchema, initialValues } from './validation';
 import { useMutation } from '@apollo/react-hooks';
 import { ADDdepression } from '../../queries/depression';
 import HeaderView from '../../components/header-view';
 import Question from '../../components/question';
 import { SuccessMessage, MessageAlert } from './result';
+const { Content } = Layout;
 
 const enhance = compose(
   withState('step', 'setStep', 1),
@@ -72,59 +73,61 @@ export const Depression = ({ step, nextStep, backStep }) => {
         { success && <SuccessMessage /> }
         { alert && <MessageAlert /> }
       </Modal>
-      <form onSubmit={handleSubmit}>
-        <div className="section ft">
-          {{
-            1: (
-              <Question
-                text={questions[0].text}
-                name={questions[0].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-                first
-              />
-            ),
-            2: (
-              <Question
-                text={questions[1].text}
-                name={questions[1].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-            3: (
-              <Question
-                text={questions[2].text}
-                name={questions[2].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-            4: (
-              <Question
-                text={questions[3].text}
-                name={questions[3].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-          }[step] || (
-            <Button
-              type="primary"
-              htmlType="submit"
-              block={isSubmitting}
-              loading={isSubmitting}
-            >
-              Seguiente
-            </Button>
-          )}
-          <br />
-        </div>
-      </form>
+      <Content>
+        <form onSubmit={handleSubmit}>
+          <div className="section ft fade-in--top">
+            {{
+              1: (
+                <Question
+                  text={questions[0].text}
+                  name={questions[0].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                  first
+                />
+              ),
+              2: (
+                <Question
+                  text={questions[1].text}
+                  name={questions[1].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                />
+              ),
+              3: (
+                <Question
+                  text={questions[2].text}
+                  name={questions[2].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                />
+              ),
+              4: (
+                <Question
+                  text={questions[3].text}
+                  name={questions[3].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                />
+              ),
+            }[step] || (
+              <Button
+                type="primary"
+                htmlType="submit"
+                block={isSubmitting}
+                loading={isSubmitting}
+              >
+                Seguiente
+              </Button>
+            )}
+            <br />
+          </div>
+        </form>
+      </Content>
     </HeaderView>
   );
 };

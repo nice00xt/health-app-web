@@ -8,7 +8,7 @@ export const LayoutContent = ({ children }) =>{
   return (
     <Layout>
       { children }
-      <TabBar />
+      {/* <TabBar /> */}
     </Layout>
   )
 }

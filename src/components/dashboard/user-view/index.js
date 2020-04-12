@@ -19,7 +19,7 @@ export const UserView = () => {
             <Card
               type="inner"
               title="Formula"
-              extra={<Link to="/admin/list-view">Agreagar</Link>}
+              extra={<Link to="/admin/list-view">Agregar</Link>}
             >
             <MedicineList />
             </Card>

@@ -35,7 +35,7 @@ export class ChartView extends Component {
         <Content className="fade-in">
           <Row>
             <Col span={24}>
-              <div className='section'>
+              <div className='section fade-in--top'>
               <List
                 header={<div>Lista de graficos</div>}
                 bordered

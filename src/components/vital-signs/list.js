@@ -12,15 +12,15 @@ const renderList = ({ vitalsigns }) => {
       bordered
       dataSource={orderDate}
       renderItem={({ blood_pressure, heart_rate, weight, created_at }) => (
-          <List.Item>
-              <Card title={`${ moment(created_at).format('MMMM DD YYYY') }`} style={{ width: 300 }}>
-                <p>Frecuencia cardíaca: {blood_pressure} /ppm</p>
-                <p>Tensión Arterial: {heart_rate} /mm</p>
-                <p>Peso: {weight} /kgm</p>
-              </Card>
-          </List.Item>
-        )}
-      />
+        <List.Item>
+          <Card title={`${ moment(created_at).format('MMMM DD YYYY') }`} style={{ width: 300 }}>
+            <p>Frecuencia cardíaca: {blood_pressure} /ppm</p>
+            <p>Tensión Arterial: {heart_rate} /mm</p>
+            <p>Peso: {weight} /kgm</p>
+          </Card>
+        </List.Item>
+      )}
+    />
   )
 }
 

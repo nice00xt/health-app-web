@@ -77,7 +77,7 @@ export const GraphView = ({ loading, data }) => {
 
   return (
     <Fragment>
-      <div className='section'>
+      <div className='section fade-in--top'>
       { loading ? <Spin tip="cargando..." />
       : renderGraph(data.valorations)}
       </div>

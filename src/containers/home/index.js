@@ -19,7 +19,7 @@ const options =[
   { icon: 'schedule', title: 'Auto valoración', uri: 'check-valoration' },
   { icon: 'fund', title: 'Signos vitales', uri: 'vital-signs' },
   { icon: 'reconciliation', title: 'Depresión', uri: 'depression' },
-  // { icon: 'medicine-box', title: 'Medicamentos', uri: '/' },
+  { icon: 'medicine-box', title: 'Formula', uri: 'medicine-view' },
   // { icon: 'pie-chart', title: 'Graficos', uri: 'chart-view' },
   { icon: 'idcard', title: 'Perfil', uri: '/' },
 ]
