@@ -30,7 +30,6 @@ export const VitalSignForm = () => {
       }
       onAddVitalSign({
         variables: { ...attr },
-        refetchQueries: [{ query: fetchList }]
       }).then(() => {
         setSubmitting(false);
         success();

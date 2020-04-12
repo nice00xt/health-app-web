@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import moment from 'moment';
 import { orderBy } from 'lodash';
-import { useQuery } from '@apollo/react-hooks';
+import { useSubscription } from '@apollo/react-hooks';
 import { fetchList } from '../../queries/signs';
 import { List, Spin, Card } from 'antd';
 
@@ -25,7 +25,7 @@ const renderList = ({ vitalsigns }) => {
 }
 
 export const VitalSignsList = () => {
-  const { loading, data } = useQuery(fetchList);
+  const { loading, data } = useSubscription(fetchList);
 
   return (
     <Fragment>
