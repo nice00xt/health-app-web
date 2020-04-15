@@ -5,6 +5,7 @@ import { Typography, Input, Button, message } from 'antd';
 import { useMutation } from '@apollo/react-hooks';
 import { addVitalSign } from '../../queries/signs';
 const { Text } = Typography;
+const InputGroup = Input.Group
 
 const success = () => {
   message.success('Los datos han sido guardados', 2.5);
@@ -15,16 +16,20 @@ export const VitalSignForm = () => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: ({ heartRate, bloodPressure, weight }, { setSubmitting }) => {
+    onSubmit: ({ heartRate, systolic, diastolic, weight }, { setSubmitting, resetForm }) => {
       const attr = {
         heart_rate: heartRate,
-        blood_pressure: bloodPressure,
+        blood_pressure: '',
+        systolic,
+        diastolic,
         weight
       }
+
       onAddVitalSign({
         variables: { ...attr },
       }).then(() => {
         setSubmitting(false);
+        resetForm({})
         success();
       });
     }
@@ -34,56 +39,79 @@ export const VitalSignForm = () => {
   return (
     <Fragment>
       <form onSubmit={handleSubmit}>
-        <div className="section-header">
-          <Text>Ingresa tus resultados</Text>
-        </div>
         <div className="section ft fade-in--top">
           <div className="form-group">
-            <Text>Frecuencia cardíaca</Text>
-            <Input
-              value={values.heartRate}
-              placeholder="Basic usage"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              name="heartRate"
-              type="text"
-              id="heartRate"
-            />
+            <Text style={{ fontSize: 18, marginBottom: 10 }}>Frecuencia cardíaca</Text>
+            <InputGroup>
+              <Input
+                value={values.heartRate}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="heartRate"
+                type="number"
+                id="heartRate"
+                size="large"
+                autoComplete='off'
+                style={{ width: '50%' }}
+                suffix="LPM"
+              />
+            </InputGroup>
           </div>
           <div className="form-group">
-            <Text>Tensión Arterial</Text>
-            <Input
-              value={values.bloodPressure}
-              placeholder="Basic usage"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              name="bloodPressure"
-              id="bloodPressure"
-              type="text"
-            />
+            <Text style={{ fontSize: 18, marginBottom: 10 }}>Tensión Arterial</Text>
+            <InputGroup>
+              <Input
+                value={values.systolic}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="systolic"
+                id="systolic"
+                type="number"
+                size="large"
+                style={{ width: '35%' }}
+                autoComplete='off'
+              />
+              <Input
+                value={values.diastolic}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="diastolic"
+                id="diastolic"
+                type="number"
+                size="large"
+                style={{ width: '40%' }}
+                autoComplete='off'
+                suffix="mm/hg"
+              />
+            </InputGroup>
           </div>
           <div className="form-group">
-            <Text>Peso</Text>
-            <Input
-              value={values.weight}
-              placeholder="Basic usage"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              name="weight"
-              id="weight"
-              type="text"
-            />
+            <Text style={{ fontSize: 18, marginBottom: 10 }}>Peso</Text>
+            <InputGroup>
+              <Input
+                value={values.weight}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="weight"
+                id="weight"
+                type="number"
+                size="large"
+                autoComplete='off'
+                style={{ width: '50%' }}
+                suffix="Kg"
+              />
+            </InputGroup>
           </div>
           <br />
+          <Button
+            type="primary"
+            htmlType="submit"
+            block={isSubmitting}
+            loading={isSubmitting}
+          >
+            Guardar
+          </Button>
         </div>
-        <Button
-          type="primary"
-          htmlType="submit"
-          block={isSubmitting}
-          loading={isSubmitting}
-        >
-          Guardar
-        </Button>
       </form>
     </Fragment>
   );

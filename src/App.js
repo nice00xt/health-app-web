@@ -16,11 +16,9 @@ import { fbConfig } from './libs/firebase';
 import 'moment/locale/es'
 import './styles/main.scss'
 import 'antd/dist/antd.css';
-
 initializeApp(fbConfig);
-// const client = new ApolloClient({ uri: 'https://crdapp.herokuapp.com/v1/graphql' });
 
-const wsurl = 'ws://crdapp.herokuapp.com/v1/graphql';
+const wsurl = 'wss://crdapp.herokuapp.com/v1/graphql';
 const httpurl = 'https://crdapp.herokuapp.com/v1/graphql';
 
 const wsLink = new WebSocketLink({

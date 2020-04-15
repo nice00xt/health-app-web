@@ -4,8 +4,9 @@ import { useFormik } from 'formik';
 import { compose, withState, withHandlers } from 'recompose';
 import { Button, Modal } from 'antd';
 import { questionsSecond, validationSchemaSecond, initialValuesSecond } from './validation';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useSubscription } from '@apollo/react-hooks';
 import { ADDdepression } from '../../queries/depression';
+import { updateStatus, showStatus } from '../../queries/status';
 import HeaderView from '../../components/header-view';
 import Question from '../../components/question';
 import { SuccessMessage, MessageAlert } from './result';
@@ -19,6 +20,7 @@ const enhance = compose(
 );
 
 export const DepressionSecond = ({ step, nextStep, backStep }) => {
+  const { loading, data } = useSubscription(showStatus);
   const [hadnleADDdepression] = useMutation(ADDdepression);
   const [visible, openModal] = useState(false);
   const [resultMessage, setResult] = useState({

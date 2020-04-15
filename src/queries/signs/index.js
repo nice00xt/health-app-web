@@ -4,6 +4,8 @@ export const fetchList = gql`
   subscription VitalSign {
     vitalsigns {
       blood_pressure
+      systolic
+      diastolic
       created_at
       heart_rate
       weight
@@ -14,15 +16,19 @@ export const fetchList = gql`
 
 export const addVitalSign = gql`
   mutation addSigns(
-    $heart_rate: String
+    $heart_rate: numeric
     $blood_pressure: String
-    $weight: String
+    $weight: numeric
+    $systolic: numeric
+    $diastolic: numeric
   ) {
     insert_vitalsigns(
       objects: {
         heart_rate: $heart_rate
         blood_pressure: $blood_pressure
         weight: $weight
+        systolic: $systolic
+        diastolic: $diastolic
       }
     ) {
       returning {
@@ -32,6 +38,8 @@ export const addVitalSign = gql`
         id
         updated_at
         weight
+        systolic
+        diastolic
       }
     }
   }

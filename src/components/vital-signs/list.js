@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import moment from 'moment';
 import { orderBy } from 'lodash';
-import { useSubscription } from '@apollo/react-hooks';
-import { fetchList } from '../../queries/signs';
-import { List, Spin, Card } from 'antd';
+import { List, Spin, Card, Typography } from 'antd';
+
+const { Text } = Typography;
 
 const renderList = ({ vitalsigns }) => {
   const orderDate = orderBy(vitalsigns, e => new Date(e.created_at), ['desc']);
@@ -11,26 +11,30 @@ const renderList = ({ vitalsigns }) => {
     <List
       bordered
       dataSource={orderDate}
-      renderItem={({ blood_pressure, heart_rate, weight, created_at }) => (
+      renderItem={({ systolic, diastolic, heart_rate, weight, created_at }) => (
         <List.Item>
-          <Card title={`${ moment(created_at).format('MMMM DD YYYY') }`} style={{ width: 300 }}>
-            <p>Frecuencia cardíaca: {blood_pressure} /ppm</p>
-            <p>Tensión Arterial: {heart_rate} /mm</p>
-            <p>Peso: {weight} /kgm</p>
-          </Card>
+          <div className='fade-in-image'>
+            <Card title={`${ moment(created_at).format('MMMM DD YYYY') }`} style={{ width: 300 }}>
+              <Text style={{ fontSize: 18 }}>Frecuencia cardíaca: <br /><Text code><b>{heart_rate}</b> Lpm</Text></Text>
+              <br/>
+              <br/>
+              <Text style={{ fontSize: 18 }}>Tensión Arterial: <br /><Text code><b>{`${systolic}/${diastolic}`}</b> mm/hg</Text></Text>
+              <br/>
+              <br/>
+              <Text style={{ fontSize: 18 }}>Peso: <br /><Text code><b>{weight}</b> Kg</Text></Text>
+            </Card>
+          </div>
         </List.Item>
       )}
     />
   )
 }
 
-export const VitalSignsList = () => {
-  const { loading, data } = useSubscription(fetchList);
-
+export const VitalSignsList = ({ loading, data }) => {
   return (
     <Fragment>
       <div className='scroll-list'>
-        { loading ? <Spin /> : renderList(data) }
+        { loading ? <div className="load"><Spin tip="cargando..."/></div> : renderList(data) }
       </div>
     </Fragment>
   )

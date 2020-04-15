@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { List } from 'antd';
+import moment from 'moment';
+import { List, Spin, Typography } from 'antd';
 import { useSubscription, useMutation } from '@apollo/react-hooks';
 import { showMedication, deleteMedication } from '../../../queries/medication';
 import FormMedication from './form';
-
 import './styles.scss';
+const { Text } = Typography;
 
 export const MedicineList = ({ actions }) => {
   const [ onDeleteMedication ] = useMutation(deleteMedication);
@@ -32,9 +33,10 @@ export const MedicineList = ({ actions }) => {
     }
   };
 
-  if (loading) { return <span>loading... </span> }
+  if (loading) { return <div className="load"><Spin tip="cargando..." /></div> }
+
   return (
-    <div>
+    <div className="fade-in-image">
       <List
         bordered
         header={<strong>Formula Actual</strong>}
@@ -48,6 +50,11 @@ export const MedicineList = ({ actions }) => {
               title={item.name}
               description={[<span>{ item.quantity }</span>, <span> - {item.description}</span>]}
             />
+            <Text
+              style={{ fontSize: 11, color: '#d7d7d7', textTransform: 'capitalize' }}
+              type="secondary">
+              {moment(item.created_at).format('MMM D - YY')}
+            </Text>
           </List.Item>
         )}
       />

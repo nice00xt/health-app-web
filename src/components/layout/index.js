@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Layout
 } from 'antd';
-import TabBar from '../tab-bar';
+// import TabBar from '../tab-bar';
 
 export const LayoutContent = ({ children }) =>{
   return (

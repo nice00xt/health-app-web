@@ -1,9 +1,10 @@
 import * as Yup from 'yup';
 
 export const validationSchema = Yup.object().shape({
-  heartRate: Yup.string().required('required'),
-  bloodPressure: Yup.string().required('required'),
-  weight: Yup.string().required('required')
+  heartRate: Yup.number().required('required'),
+  systolic: Yup.number().required('required'),
+  diastolic: Yup.number().required('required'),
+  weight: Yup.number().required('required')
 });
 
 // export const questions = [
@@ -17,7 +18,8 @@ export const validationSchema = Yup.object().shape({
 // ]
 
 export const initialValues = {
-  heartRate: '',
-  bloodPressure: '',
-  weight: ''
+  heartRate: null,
+  weight: null,
+  systolic: null,
+  diastolic: null
 }

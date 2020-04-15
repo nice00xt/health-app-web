@@ -27,7 +27,7 @@ export const FormMedication = () => {
         variables: { ...values },
       }).then(() => {
         setSubmitting(false);
-        resetForm({})
+        resetForm({});
       }).catch((res) => {
         console.log(res)
       })

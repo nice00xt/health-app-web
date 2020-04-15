@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { useSubscription } from '@apollo/react-hooks';
 import { Doughnut } from 'react-chartjs-2';
 import moment from 'moment';
 import { map, filter } from 'lodash';
@@ -6,39 +7,45 @@ import {
   Spin,
 } from 'antd';
 
-export const GraphView = ({ loading, data }) => {
+export const GraphView = ({ fetchData, title, type, size, currentDate }) => {
+  const { loading, data } = useSubscription(fetchData);
+  const { date } = currentDate;
   const renderGraph = (arr) => {
     const formated = map(arr, (d) => {
       const { id, status, created_at } = d;
       return {
         id,
         status,
-        date: moment(created_at).format('MMMM')
+        date: moment(created_at).format('MMMM - YYYY')
       }
     })
-    const good = filter(formated, { status: 1, date: 'marzo' });
-    const medium = filter(formated, { status: 2, date: 'marzo' });
-    const bad = filter(formated, { status: 3, date: 'marzo' });
+
+    const good = filter(formated, { status: 1, date });
+    const medium = filter(formated, { status: 2, date });
+    const bad = filter(formated, { status: 3, date });
 
     const percent = (text, n) => {
       const total = good.length + medium.length + bad.length;
       const percent = (n / total) * 100;
+      const fixed = percent.toFixed(1)
 
-      return `${text}: ${percent.toFixed(1)}%`;
+      return `${text}: ${percent ? `${fixed}%` : 'Sin datos'}`;
     }
+
     const options = {
       legend: {
         labels: {
-          fontSize: 18
+          fontSize: 12
         },
         position: 'bottom'
       },
       tooltips: {
         enabled: false,
-        bodyFontSize: 20,
+        bodyFontSize: 16,
         footerFontStyle: 'bold'
       }
     }
+
     const mock = {
       labels: [
         percent('Compensado', good.length),
@@ -63,11 +70,11 @@ export const GraphView = ({ loading, data }) => {
 
     return (
       <div className='chart-box'>
-        <span className="chart-box__title">resultados valoración: { moment([]).format('MMMM - YYYY') }</span>
+        <span className="chart-box__title">{title}: { currentDate.date }</span>
         <Doughnut
           data={mock}
-          width={500}
-          height={500}
+          width={size}
+          height={size}
           options={options}
         />
         <br />
@@ -77,10 +84,10 @@ export const GraphView = ({ loading, data }) => {
 
   return (
     <Fragment>
-      <div className='section fade-in--top'>
-      { loading ? <Spin tip="cargando..." />
-      : renderGraph(data.valorations)}
-      </div>
+      { loading ? <Spin className="load" tip="cargando..." />
+      : (<div className="fade-in-image">
+          { renderGraph(data[type]) }
+        </div>)}
     </Fragment>
   )
 }

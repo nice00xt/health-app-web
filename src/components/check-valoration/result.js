@@ -7,7 +7,7 @@ export const SuccessMessage = () => {
     <Result
       status="success"
       title="Ánimo!"
-      subTitle="continua los hábitos de estilo de vida saludable en curso"
+      subTitle="Continua los hábitos de estilo de vida saludable en curso"
     />
   )
 }
@@ -21,20 +21,28 @@ export const MessageAlert = () => {
   )
 }
 
-export const MessageWarning = () => {
+export const MessageWarning = ({ status }) => {
+  if (status !== '3') {
+    return (
+      <Result
+        status="warning"
+        title="Sugerimos hacerte unas preguntas mas"
+        extra={[
+          <Button
+            type="primary"
+            key="console"
+            onClick={() => navigate('depression')}
+          >
+            Llenar encuesta de depresión
+          </Button>,
+        ]}
+      />
+    )
+  }
+
   return (
     <Result
-      status="warning"
-      title="Sugerimos hacerte unas preguntas mas"
-      extra={[
-        <Button
-          type="primary"
-          key="console"
-          onClick={() => navigate('depression')}
-        >
-          Llenar encuesta de depresión
-        </Button>,
-      ]}
+      title="Gracias consultar."
     />
   )
 }

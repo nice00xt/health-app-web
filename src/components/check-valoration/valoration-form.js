@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
+import { Button, Spin } from 'antd';
+import moment from 'moment';
 import { compose, withState, withHandlers } from 'recompose';
 import { questions, validationSchema, initialValues } from './validation';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useSubscription } from '@apollo/react-hooks';
 import { ADDvaloration } from '../../queries/valorations';
-import { navigate } from '@reach/router';
-import { Button, Modal, Typography } from 'antd';
+import { updateStatus } from '../../queries/status';
 import Question from '../../components/question';
 import { SuccessMessage, MessageAlert, MessageWarning } from './result';
 
-
-const { Text } = Typography;
 const enhance = compose(
   withState('step', 'setStep', 1),
   withHandlers({
@@ -19,148 +18,172 @@ const enhance = compose(
   })
 );
 
-export const CheckValorationForm = ({ step, nextStep, backStep }) => {
+export const CheckValorationForm = ({ step, nextStep, backStep, fetchData }) => {
+  const { loading, data } = useSubscription(fetchData);
   const [hadnleAddValorations] = useMutation(ADDvaloration);
-  const [visible, openModal] = useState(false);
-  const [resultMessage, setResult] = useState({
-    success: false,
-    warning: false,
-    alert: false,
-    loading: false
-  });
+  const [onUpdateStatus] = useMutation(updateStatus)
+  const currentDate = moment().format('MMMM/DD/YYYY');
 
-  const handleRedirect = (result) => {
-    setResult({ loading: true });
+  const handleRedirect = (result, setSubmitting) => {
     if (result >= 6) {
       hadnleAddValorations({
         variables: { status: 3 }
       }).then(() => {
-        setResult({ warning: true, loading: false });
+        setSubmitting(false);
+        onUpdateStatus({
+          variables: {
+            updated: currentDate,
+            name: '3',
+            id: 1,
+            description: 'El usuario Usuario 1 necesita atención medica'}
+          })
       })
     } else if (result === 0) {
       hadnleAddValorations({
         variables: { status: 1 }
       }).then(() => {
-        setResult({ success: true, loading: false });
+        setSubmitting(false);
+        onUpdateStatus({
+          variables: {
+            updated: currentDate,
+            name: '1',
+            id: 1,
+            description: ''}
+          })
       })
     } else if (result >= 1) {
       hadnleAddValorations({
         variables: { status: 2 }
       }).then(() => {
-        setResult({ alert: true, loading: false });
+        setSubmitting(false);
+        onUpdateStatus({
+          variables: {
+            updated: currentDate,
+            name: '2',
+            id: 1,
+            description: ''}
+          })
       })
     }
-    openModal(true);
   };
-
-  const closeModal = () => {
-    openModal(false);
-    navigate('/');
-  }
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: (values, { setSubmitting }) => {
       const result = Object.values(values).filter(item => item === true).length;
-      handleRedirect(result);
-      setSubmitting(false);
+      handleRedirect(result, setSubmitting);
     }
   });
   const { handleSubmit, isSubmitting, setFieldValue } = formik;
-  const { success, warning, alert } = resultMessage;
+
+
+  const renderMessage = () => {
+    const status = data.status[1].name;
+    const statusDepression = data.status[0].name;
+
+    console.log(data.status, 'data.status 0')
+    if (status === '2') {
+      return <MessageAlert status={statusDepression} />
+    } else if (status === '1') {
+      return <SuccessMessage />
+    } else if (status === '3') {
+      return <MessageWarning />
+    }
+  }
+
+  if (loading) {
+    return <Spin className="load" tip="cargando..." />
+  }
+
   return (
     <>
-      <Modal
-        visible={visible}
-        onCancel={() => closeModal()}
-        footer={null}
-      >
-        { success && <SuccessMessage /> }
-        { warning && <MessageWarning /> }
-        { alert && <MessageAlert /> }
-      </Modal>
-      <form onSubmit={handleSubmit}>
-        <div className="section ft fade-in--top">
-
-          {{
-            1: (
-              <Question
-                text={questions[0].text}
-                name={questions[0].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-                first
-              />
-            ),
-            2: (
-              <Question
-                text={questions[1].text}
-                name={questions[1].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-            3: (
-              <Question
-                text={questions[2].text}
-                name={questions[2].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-            4: (
-              <Question
-                text={questions[3].text}
-                name={questions[3].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-            5: (
-              <Question
-                text={questions[4].text}
-                name={questions[4].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-            6: (
-              <Question
-                text={questions[5].text}
-                name={questions[5].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            ),
-            7: (
-              <Question
-                text={questions[6].text}
-                name={questions[6].name}
-                nextStep={nextStep}
-                backStep={backStep}
-                setFieldValue={setFieldValue}
-              />
-            )
-          }[step] || (
-            <Button
-              type="primary"
-              htmlType="submit"
-              block={isSubmitting}
-              loading={isSubmitting}
-            >
-              Terminar
-            </Button>
-          )}
-          <br />
-        </div>
-      </form>
+      { data.status[1].updated === currentDate ? (
+        <section className='section fade-in--top'>
+          { renderMessage() }
+        </section>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <div className="section ft fade-in--top">
+            {{
+              1: (
+                <Question
+                  text={questions[0].text}
+                  name={questions[0].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                  first
+                />
+              ),
+              2: (
+                <Question
+                  text={questions[1].text}
+                  name={questions[1].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                />
+              ),
+              3: (
+                <Question
+                  text={questions[2].text}
+                  name={questions[2].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                />
+              ),
+              4: (
+                <Question
+                  text={questions[3].text}
+                  name={questions[3].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                />
+              ),
+              5: (
+                <Question
+                  text={questions[4].text}
+                  name={questions[4].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                />
+              ),
+              6: (
+                <Question
+                  text={questions[5].text}
+                  name={questions[5].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                />
+              ),
+              7: (
+                <Question
+                  text={questions[6].text}
+                  name={questions[6].name}
+                  nextStep={nextStep}
+                  backStep={backStep}
+                  setFieldValue={setFieldValue}
+                />
+              )
+            }[step] || (
+              <Button
+                type="primary"
+                htmlType="submit"
+                block={isSubmitting}
+                loading={isSubmitting}
+              >
+                Terminar
+              </Button>
+            )}
+            <br />
+          </div>
+        </form>
+      )}
     </>
   );
 };
