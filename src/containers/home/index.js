@@ -20,8 +20,9 @@ const options =[
   { icon: 'fund', title: 'Signos vitales', uri: 'vital-signs' },
   { icon: 'reconciliation', title: 'Depresión', uri: 'depression' },
   { icon: 'medicine-box', title: 'Formula', uri: 'medicine-view' },
-  // { icon: 'pie-chart', title: 'Graficos', uri: 'chart-view' },
   { icon: 'idcard', title: 'Perfil', uri: '/' },
+  { icon: 'pie-chart', title: 'Graficas', uri: 'graph-view' },
+  // { icon: 'pie-chart', title: 'Graficos', uri: 'chart-view' },
 ]
 
 export const Home = () => {

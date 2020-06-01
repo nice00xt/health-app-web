@@ -6,9 +6,9 @@ import MedicineList from '../medicine-list';
 import { fetchValorations } from '../../../queries/valorations';
 import { fetchDepression } from '../../../queries/depression';
 import { fetchList } from '../../../queries/signs';
-import GraphView from '../../graph-view.js';
-import LineChart from '../../graph-view.js/line-chart';
-import MixLineChart from '../../graph-view.js/mix-line-chart';
+import GraphView from '../../graph-view';
+import LineChart from '../../graph-view/line-chart';
+import MixLineChart from '../../graph-view/mix-line-chart';
 
 const { MonthPicker } = DatePicker;
 

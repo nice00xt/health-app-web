@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import { Tabs, Icon, Layout, DatePicker } from 'antd';
+import { Tabs, Layout, DatePicker } from 'antd';
 import moment from 'moment';
 import { fetchValorations } from '../../queries/valorations';
 import { fetchDepression } from '../../queries/depression';
-import { showStatus } from '../../queries/status';
 
 import HeaderView from '../../components/header-view';
-import CheckValorationForm from './valoration-form';
-import GraphView from '../graph-view';
+import GraphView from '../../components/graph-view';
 
 const { TabPane } = Tabs;
 const  { Content } = Layout;
 const { MonthPicker } = DatePicker;
 
-export const CheckValoration = () => {
+export const GraphsView = () => {
   const [ currentDate, useDate ] = useState({ date: moment().format('MMMM - YYYY') });
   const handleDate = (date, addMonth) => {
     const formatDate = date.format('MMMM - YYYY');
@@ -30,21 +28,7 @@ export const CheckValoration = () => {
         key="1"
         tab={
           <span>
-            <Icon type="snippets" />
-            Preguntas
-          </span>
-        }
-      >
-        <Content>
-          <CheckValorationForm fetchData={showStatus}/>
-        </Content>
-      </TabPane>
-      <TabPane
-        key="2"
-        tab={
-          <span>
-            <Icon type="pie-chart" />
-            Grafica
+            Auto Valoración
           </span>
         }
       >
@@ -65,7 +49,25 @@ export const CheckValoration = () => {
               title='Resultados valoración'
             />
           </div>
-          <div className='section'>
+        </Content>
+      </TabPane>
+      <TabPane
+        key="2"
+        tab={
+          <span>
+            Depresión
+          </span>
+        }
+      >
+        <Content>
+          <div style={{ marginBottom: 15, display: 'flex', justifyContent: 'flex-start' }}>
+            <MonthPicker
+              onChange={(date) => handleDate(date, useDate)}
+              placeholder="Seleccionar Fecha"
+              size='large'
+            />
+          </div>
+          <div className='section' style={{ marginBottom: 15 }}>
             <GraphView
               size={200}
               type='depression'
@@ -76,9 +78,21 @@ export const CheckValoration = () => {
           </div>
         </Content>
       </TabPane>
+      <TabPane
+        key="3"
+        tab={
+          <span>
+            Formula
+          </span>
+        }
+      >
+        <Content>
+          <span>depresion</span>
+        </Content>
+      </TabPane>
     </Tabs>
     </HeaderView>
   )
 }
 
-export default CheckValoration;
+export default GraphsView;

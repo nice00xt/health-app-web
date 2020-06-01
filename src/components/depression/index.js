@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { navigate } from '@reach/router';
 import { useFormik } from 'formik';
 import moment from 'moment';
@@ -10,7 +10,6 @@ import { ADDdepression } from '../../queries/depression';
 import { updateStatus, showStatus } from '../../queries/status';
 import HeaderView from '../../components/header-view';
 import Question from '../../components/question';
-import { SuccessMessage, MessageAlert } from './result';
 const { Content } = Layout;
 
 
@@ -55,17 +54,6 @@ export const Depression = ({ step, nextStep, backStep }) => {
       handleRedirect(result, setSubmitting);
     }
   });
-
-  const renderMessage = (statusMessage) => {
-    if (statusMessage === '2') {
-      return <MessageAlert />
-    } else if (statusMessage === '1') {
-      return <SuccessMessage />
-    } else if (statusMessage === '3') {
-      return <span></span>
-    }
-  }
-
 
   const {
     handleSubmit,

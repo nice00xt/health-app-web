@@ -4,9 +4,10 @@ export const showMedication = gql`
   subscription Medication {
     medication {
       name
-      description,
+      description
       quantity
       created_at
+      taken
       id
     }
   }
@@ -46,18 +47,26 @@ export const deleteMedication = gql`
 `;
 
 export const editMedication = gql`
-  mutation EditMedication(
-    $name: String,
-    $id: Int!
-  ) {
+  mutation EditMedication($taken: Boolean, $id: Int!) {
     update_medication(
       where: {id: {_eq: $id}},
-      _set: {
-        name: $name
-      }) {
+      _set: {taken: $taken}) {
       returning {
         id
-        name
+        taken
+      }
+    }
+  }
+`;
+
+export const medicationDefault = gql`
+  mutation EditMedication($taken: Boolean, $id: Int!) {
+    update_medication(
+      where: {},
+      _set: {taken: false}) {
+      returning {
+        id
+        taken
       }
     }
   }

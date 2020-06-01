@@ -5,6 +5,7 @@ import LayoutContent from '../components/layout';
 import Home from '../containers/home';
 import Profile from '../containers/profile';
 import Dashboard from '../containers/dashboard';
+import GraphsView from '../containers/graph';
 import CheckValoration from '../components/check-valoration';
 import Depression from '../components/depression';
 import DepressionSecond from '../components/depression/question-part';
@@ -32,6 +33,7 @@ export const Routes = () => {
         <ChartView path="chart-view" />
         <ChartDetail path="chart-detail"/>
         <MedicineView path='medicine-view' />
+        <GraphsView path='graph-view' />
       </LayoutContent>
       <DashboardLayout path="admin/">
         <Dashboard path='/'/>
