@@ -34,7 +34,9 @@ export const VitalSignsList = ({ loading, data }) => {
   return (
     <Fragment>
       <div className='scroll-list'>
-        { loading ? <div className="load"><Spin tip="cargando..."/></div> : renderList(data) }
+        { loading
+          ? <div className="load"><Spin tip="cargando..."/></div>
+          : renderList(data) }
       </div>
     </Fragment>
   )

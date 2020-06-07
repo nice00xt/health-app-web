@@ -1,65 +1,35 @@
-import React, { useState } from 'react';
-import { orderBy } from 'lodash';
-import { Layout, List, Spin, Checkbox, Button } from 'antd';
-import { useSubscription, useMutation } from '@apollo/react-hooks';
-import { showMedication, editMedication } from '../../queries/medication';
+import React from 'react';
+import { Layout, Result } from 'antd';
+import { useSubscription } from '@apollo/react-hooks';
+import { getMedStatus } from '../../queries/medication';
 import HeaderView from '../../components/header-view';
-import ProgressBar from './ProgressBar';
+import { validateDate } from '../../libs/helpers';
+import MedicineList from './medication-list';
 const { Content } = Layout;
 
 export const MedicineView = () => {
-  const { loading, data } = useSubscription(showMedication);
-  const [onEditMedication] = useMutation(editMedication);
-  const [ isCheckLOading, setLoadingCheck ] = useState(false);
+  const { loading, data } = useSubscription(getMedStatus);
+  const renderContent = () => {
+    const validate = validateDate(data.medication_status);
+    if (validate) {
+      return (
+        <div className="section fade-in--top">
+          <Result
+            status="success"
+            title="Estado Guardado"
+            subTitle="Continua los hábitos de estilo de vida saludable en curso"
+          />
+        </div>
+      )
+    }
 
-  const onChange = (e, idx) => {
-    const taken = e.target.checked;
-    const id = idx.toString();
-    setLoadingCheck(true)
-    onEditMedication({
-      variables: { taken, id }
-    }).then(() => {
-      setLoadingCheck(false)
-    })
+    return <MedicineList />
   }
-  // aderente
-  // no aderente
 
   return (
     <HeaderView headerTitle="Formula">
       <Content>
-        { loading ? <div className="load"><Spin tip="cargando..." /></div>: (
-          <div className='section fade-in--top'>
-            <List
-              bordered
-              header={<strong>Formula Actual</strong>}
-              className='fade-in-image'
-              dataSource={orderBy(data.medication, ['id'], ['asc'])}
-              itemLayout="horizontal"
-              renderItem={item => (
-                <List.Item key={item.id}>
-                  <List.Item.Meta
-                    title={item.name}
-                    description={[<span>{ item.quantity }</span>, <span> - {item.description}</span>]}
-                  />
-                  <Checkbox
-                    defaultChecked={item.taken}
-                    // disabled={item.taken}
-                    onChange={(e) => onChange(e, item.id)}/>
-                </List.Item>
-              )}
-            />
-            <ProgressBar data={data.medication} loading={isCheckLOading}/>
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{ width: '100%', marginTop: 20 }}
-            >
-              Guardar
-            </Button>
-            <div className='hoal'></div>
-          </div>
-        )}
+        { loading ? '' : renderContent() }
       </Content>
     </HeaderView>
   )

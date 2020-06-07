@@ -3,9 +3,11 @@ import { Tabs, Layout, DatePicker } from 'antd';
 import moment from 'moment';
 import { fetchValorations } from '../../queries/valorations';
 import { fetchDepression } from '../../queries/depression';
+import { getMedStatus } from '../../queries/medication';
 
 import HeaderView from '../../components/header-view';
 import GraphView from '../../components/graph-view';
+import MedicationGraph from '../../components/graph-view/medication-graph';
 
 const { TabPane } = Tabs;
 const  { Content } = Layout;
@@ -23,6 +25,13 @@ export const GraphsView = () => {
       headerTitle="Auto Valoración"
       contentTitle="Como te sientes hoy?"
     >
+      <div style={{ marginBottom: 15, display: 'flex', justifyContent: 'center' }}>
+        <MonthPicker
+          onChange={(date) => handleDate(date, useDate)}
+          placeholder="Seleccionar Fecha"
+          size='large'
+        />
+      </div>
     <Tabs defaultActiveKey="1" size='large'>
       <TabPane
         key="1"
@@ -33,13 +42,6 @@ export const GraphsView = () => {
         }
       >
         <Content>
-          <div style={{ marginBottom: 15, display: 'flex', justifyContent: 'flex-start' }}>
-            <MonthPicker
-              onChange={(date) => handleDate(date, useDate)}
-              placeholder="Seleccionar Fecha"
-              size='large'
-            />
-          </div>
           <div className='section' style={{ marginBottom: 15 }}>
             <GraphView
               size={500}
@@ -60,13 +62,6 @@ export const GraphsView = () => {
         }
       >
         <Content>
-          <div style={{ marginBottom: 15, display: 'flex', justifyContent: 'flex-start' }}>
-            <MonthPicker
-              onChange={(date) => handleDate(date, useDate)}
-              placeholder="Seleccionar Fecha"
-              size='large'
-            />
-          </div>
           <div className='section' style={{ marginBottom: 15 }}>
             <GraphView
               size={200}
@@ -87,7 +82,15 @@ export const GraphsView = () => {
         }
       >
         <Content>
-          <span>depresion</span>
+          <div className='section' style={{ marginBottom: 15 }}>
+            <MedicationGraph
+              size={500}
+              type='medication_status'
+              fetchData={getMedStatus}
+              currentDate={currentDate}
+              title='Resultados valoración'
+            />
+          </div>
         </Content>
       </TabPane>
     </Tabs>

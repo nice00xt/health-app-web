@@ -1,10 +1,9 @@
 import React from 'react';
 import { Tabs, Icon, Layout, Spin, Result } from 'antd';
 import { useSubscription } from '@apollo/react-hooks';
-import { reverse } from 'lodash';
-import moment from 'moment';
 import { fetchList } from '../../queries/signs';
 import HeaderView from '../../components/header-view';
+import { validateDate } from '../../libs/helpers';
 import VitalSignsList from './list';
 import VitalSignForm from './vitalsign-form';
 
@@ -13,10 +12,7 @@ const { Content } = Layout;
 export const VitalSigns = () => {
   const { loading, data } = useSubscription(fetchList);
   const renderForm = (list) => {
-    const currentDate = moment().format('MMMM/DD/YYYY')
-    const dataList = reverse(list);
-    const validDate = moment(dataList[0].created_at).format('MMMM/DD/YYYY') === currentDate;
-    if (validDate) {
+    if (validateDate(list)) {
       return (
         <div className="section fade-in--top">
           <Result

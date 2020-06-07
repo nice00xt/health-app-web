@@ -60,10 +60,12 @@ export const editMedication = gql`
 `;
 
 export const medicationDefault = gql`
-  mutation EditMedication($taken: Boolean, $id: Int!) {
+  mutation EditMedication(
+    $taken: Boolean,
+  ) {
     update_medication(
       where: {},
-      _set: {taken: false}) {
+      _set: { taken: $taken }) {
       returning {
         id
         taken
@@ -71,3 +73,33 @@ export const medicationDefault = gql`
     }
   }
 `;
+
+export const addMedicationStatus = gql`
+  mutation AddMedicationStatus(
+    $status: String
+    $percent: String
+  ) {
+    insert_medication_status(
+      objects: {
+        status: $status
+        percent: $percent
+      }
+    ) {
+      returning {
+        created_at
+        id
+      }
+    }
+  }
+`;
+
+
+export const getMedStatus = gql`
+  subscription GetMedicationStatus {
+    medication_status {
+      status
+      created_at
+      id
+    }
+  }
+`
