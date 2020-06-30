@@ -113,3 +113,10 @@
   justify-content: center;
   align-items: center;
 }
+
+.profile {
+  &__avatar {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
