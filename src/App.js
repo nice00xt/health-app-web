@@ -10,13 +10,9 @@ import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-import { initializeApp } from 'firebase/app';
-import { fbConfig } from './libs/firebase';
-
 import 'moment/locale/es'
 import './styles/main.scss'
 import 'antd/dist/antd.css';
-initializeApp(fbConfig);
 
 const wsurl = 'wss://crdapp.herokuapp.com/v1/graphql';
 const httpurl = 'https://crdapp.herokuapp.com/v1/graphql';

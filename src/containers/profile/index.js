@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect, useContext, useState } from "react";
+import { navigate } from "@reach/router";
+import { Row, Col, Layout, Avatar, Descriptions, Button } from 'antd';
 import HeaderView from '../../components/header-view';
-import { Row, Col, Layout, Avatar, Descriptions } from 'antd';
+import { Auth } from '../../context/AuthContext';
+import app from '../../firebaseConfig';
+
 const { Content } = Layout;
 
 export const Profile = () => {
+  const { usuario } = useContext(Auth);
+  const [nombre, setnombre] = useState(null);
+  useEffect(() => {
+    if (usuario === null) { navigate("login"); }
+
+    usuario
+      ? usuario.displayName
+        ? setnombre(usuario.displayName)
+        : setnombre(usuario.email)
+      : setnombre(null);
+  }, [ usuario]);
+
   return (
     <HeaderView headerTitle="Perfil">
       <Content>
@@ -15,12 +31,13 @@ export const Profile = () => {
                   <Avatar size={64} icon="user"/>
                 </div>
                 <Descriptions title="Informacion de usuario">
-                  <Descriptions.Item label="Nombre">Lorem ipsion</Descriptions.Item>
-                  <Descriptions.Item label="Telefono">1810000000</Descriptions.Item>
+                  <Descriptions.Item label="Email">{ nombre }</Descriptions.Item>
+                  {/* <Descriptions.Item label="Telefono">1810000000</Descriptions.Item>
                   <Descriptions.Item label="Direccion">
                     23123 1231231 123123
-                  </Descriptions.Item>
+                  </Descriptions.Item> */}
                 </Descriptions>
+                <Button onClick={() => app.auth().signOut()} key="logout" type="primary">Cerrar Sesión</Button>
               </Col>
             </Row>
           </div>

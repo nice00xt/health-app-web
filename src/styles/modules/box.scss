@@ -120,3 +120,23 @@
     margin-bottom: 30px;
   }
 }
+.login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  img {
+    width: 200px;
+  }
+}
+
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+  img {
+    width: 250px;
+  }
+}
