@@ -8,7 +8,7 @@ import app from '../../firebaseConfig';
 const { Content } = Layout;
 
 export const Profile = () => {
-  const { usuario } = useContext(Auth);
+  const { usuario, setAuthState } = useContext(Auth);
   const [nombre, setnombre] = useState(null);
   useEffect(() => {
     if (usuario === null) { navigate("login"); }
@@ -19,6 +19,13 @@ export const Profile = () => {
         : setnombre(usuario.email)
       : setnombre(null);
   }, [ usuario]);
+
+  const handleSignOut = () => {
+    setAuthState({ status: "loading" });
+    app.auth().signOut().then(() =>{
+      setAuthState({ status: "out" });
+    })
+  }
 
   return (
     <HeaderView headerTitle="Perfil">
@@ -37,7 +44,7 @@ export const Profile = () => {
                     23123 1231231 123123
                   </Descriptions.Item> */}
                 </Descriptions>
-                <Button onClick={() => app.auth().signOut()} key="logout" type="primary">Cerrar Sesión</Button>
+                <Button onClick={() => handleSignOut()} key="logout" type="primary">Cerrar Sesión</Button>
               </Col>
             </Row>
           </div>

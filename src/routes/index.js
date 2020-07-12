@@ -20,38 +20,33 @@ import ListView from "../components/dashboard/medicine-list/list-view";
 import MedicineView from "../components/medicine-view";
 
 import Login from '../auth/Login';
-// import Content from '../auth/Content';
 import Error from '../auth/Error';
-import { AuthContext } from '../context/AuthContext';
 
 export const Routes = () => {
   return (
-    <AuthContext>
-      <Router>
-        <LayoutContent path="/">
-          {/* <Content path='/' /> */}
-          <Login path="login" />
-          <Home path="/" /> 
-          <Login path='login' />
-          <Profile path="/profile" />
-          <CheckValoration path="check-valoration" />
-          <Depression path="depression" />
-          <DepressionSecond path="second-part" />
-          <VitalSigns path="vital-signs" />
-          <VitalSignsList path="vital-signs-list" />
-          <ChartView path="chart-view" />
-          <ChartDetail path="chart-detail" />
-          <MedicineView path="medicine-view" />
-          <GraphsView path="graph-view" />
-          <Error path='*' />
-        </LayoutContent>
-        <DashboardLayout path="admin/">
-          <Dashboard path="/" />
-          <UserView path="user-view" />
-          <ListView path="list-view" />
-        </DashboardLayout>
-      </Router>
-    </AuthContext>
+    <Router>
+      <LayoutContent path="/">
+        <Login path="login" />
+        <Home path="/" /> 
+        <Login path='login' />
+        <Profile path="/profile" />
+        <CheckValoration path="check-valoration" />
+        <Depression path="depression" />
+        <DepressionSecond path="second-part" />
+        <VitalSigns path="vital-signs" />
+        <VitalSignsList path="vital-signs-list" />
+        <ChartView path="chart-view" />
+        <ChartDetail path="chart-detail" />
+        <MedicineView path="medicine-view" />
+        <GraphsView path="graph-view" />
+        <Error path='*' />
+      </LayoutContent>
+      <DashboardLayout path="admin/">
+        <Dashboard path="/" />
+        <UserView path="user-view" />
+        <ListView path="list-view" />
+      </DashboardLayout>
+    </Router>
   );
 };
 

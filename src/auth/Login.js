@@ -16,33 +16,22 @@ export const validationSchema = Yup.object().shape({
 
 const Login = () => {
   const { Content } = Layout;
-  const { usuario } = useContext(Auth);
+  const { authState } = useContext(Auth);
+  const isIn = authState.status === "in";
 
   useEffect(() => {
-    if (usuario) navigate('/');
-  }, [usuario]);
+    if (isIn) navigate('/');
+  }, [isIn]);
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: 'juan@juan.com',
+      password: 'test1234',
     },
     validationSchema,
     onSubmit: ({ email, password }, { setSubmitting }) => {
-      app
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then((result) => {
-          setSubmitting(false);
-          console.log(result);
-          message.success('Bienvenido', 0.9);
-          navigate('/');
-        })
-        .catch((error) => {
-          setSubmitting(false);
-          message.error('Email o contraseña invalidos', 1);
-        });
-    },
+      handleAuth(email, password, setSubmitting);
+    }
   });
   const {
     handleSubmit,
@@ -51,6 +40,24 @@ const Login = () => {
     handleChange,
     handleBlur,
   } = formik;
+
+  const handleAuth = (email, password, setSubmitting) => {
+    app
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        setSubmitting(false);
+        message.success('Bienvenido', 0.9);
+        navigate('/');
+        // app.auth().currentUser.getIdToken(true).then((token) => {
+        //   console.log(token, 'Auth token ---')
+        // })
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        message.error('Email o contraseña invalidos', 1);
+      });
+  }
 
   return (
     <Content

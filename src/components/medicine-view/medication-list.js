@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { orderBy } from 'lodash';
 import { List, Spin, Checkbox } from 'antd';
 import { useSubscription, useMutation } from '@apollo/react-hooks';
@@ -8,9 +8,15 @@ import {
   addMedicationStatus,
   medicationDefault } from '../../queries/medication';
 import ProgressBar from './ProgressBar';
+import { Auth } from '../../context/AuthContext';
 
 export const MedicineList = () => {
-  const { loading, data } = useSubscription(showMedication);
+  const { authState } = useContext(Auth);
+
+  const { loading, data, error } = useSubscription(showMedication, {
+    variables: { userId: authState.user.uid }
+  });
+  console.log(error, 'error')
   const [onEditMedication] = useMutation(editMedication);
   const [onMedicationDefault] = useMutation(medicationDefault);
   const [ onAddMedicationStatus ] = useMutation(addMedicationStatus);
@@ -31,10 +37,10 @@ export const MedicineList = () => {
   if (loading) {
     return <div className="load"><Spin tip="cargando..." /></div>
   }
-
+  console.log(data, 'DATA -----')
   return (
       <div className='section fade-in--top'>
-        <List
+        {/* <List
           bordered
           header={<strong>Formula Actual</strong>}
           className='fade-in-image'
@@ -52,12 +58,12 @@ export const MedicineList = () => {
                 onChange={(e) => onChange(e, item.id)}/>
             </List.Item>
           )}
-        />
-        <ProgressBar
+        /> */}
+        {/* <ProgressBar
           data={data.medication} loading={isCheckLOading}
           addStatus={onAddMedicationStatus}
           medicationDefault={onMedicationDefault}
-        />
+        /> */}
         <div className='hoal'></div>
       </div>
   )
