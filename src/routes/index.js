@@ -20,32 +20,38 @@ import ListView from "../components/dashboard/medicine-list/list-view";
 import MedicineView from "../components/medicine-view";
 
 import Login from '../auth/Login';
+import SignUp from '../auth/Signup';
 import Error from '../auth/Error';
+
+import AuthRequired from '../auth/AuthRequired';
 
 export const Routes = () => {
   return (
     <Router>
       <LayoutContent path="/">
+        <AuthRequired path='/'>
+          <Home path="/" /> 
+          <Login path='login' />
+          <Profile path="/profile" />
+          <CheckValoration path="check-valoration" />
+          <Depression path="depression" />
+          <DepressionSecond path="second-part" />
+          <VitalSigns path="vital-signs" />
+          <VitalSignsList path="vital-signs-list" />
+          <ChartView path="chart-view" />
+          <ChartDetail path="chart-detail" />
+          <MedicineView path="medicine-view" />
+          <GraphsView path="graph-view" />
+        </AuthRequired>
         <Login path="login" />
-        <Home path="/" /> 
-        <Login path='login' />
-        <Profile path="/profile" />
-        <CheckValoration path="check-valoration" />
-        <Depression path="depression" />
-        <DepressionSecond path="second-part" />
-        <VitalSigns path="vital-signs" />
-        <VitalSignsList path="vital-signs-list" />
-        <ChartView path="chart-view" />
-        <ChartDetail path="chart-detail" />
-        <MedicineView path="medicine-view" />
-        <GraphsView path="graph-view" />
+        <SignUp path='sign-up' />
         <Error path='*' />
       </LayoutContent>
-      <DashboardLayout path="admin/">
-        <Dashboard path="/" />
-        <UserView path="user-view" />
-        <ListView path="list-view" />
-      </DashboardLayout>
+        <DashboardLayout path="admin">
+          <Dashboard path="/" />
+          <UserView path="user-view" />
+          <ListView path="list-view" />
+        </DashboardLayout>
     </Router>
   );
 };

@@ -68,11 +68,11 @@ export const Depression = ({ step, nextStep, backStep }) => {
     >
       { loading ? <Spin className="load" tip="cargando..." /> : (
         <Content>
-          { data.status[0].updated === currentDate ? (
+          {/* { data.status[0].updated === currentDate ? (
             <section className="section fade-in--top">
 
             </section>
-          ) : (
+          ) : ( */}
             <form onSubmit={handleSubmit}>
               <div className="section ft fade-in--top">
                 {{
@@ -126,7 +126,7 @@ export const Depression = ({ step, nextStep, backStep }) => {
                 <br />
               </div>
             </form>
-          )}
+          {/* )} */}
         </Content>
       ) }
     </HeaderView>

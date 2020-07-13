@@ -4,7 +4,6 @@ admin.initializeApp(functions.config().firebase);
 
 // On sign up.
 exports.processSignUp = functions.auth.user().onCreate(user => {
-  console.log(user);
   // Check if user meets role criteria:
   // Your custom logic here: to decide what roles and other `x-hasura-*` should the user get
   let customClaims;

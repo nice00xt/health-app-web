@@ -125,6 +125,12 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 40px;
+  &.sign {
+    img {
+      width: 128px;
+      margin-top: 50px;
+    }
+  }
   img {
     width: 200px;
   }
@@ -139,4 +145,7 @@
   img {
     width: 250px;
   }
+}
+.text-center {
+  text-align: center;
 }

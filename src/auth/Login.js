@@ -1,16 +1,14 @@
 import React, { useContext, useEffect } from 'react';
-import { Icon, Input, Button, Layout, message } from 'antd';
+import { Form, Icon, Input, Button, Layout, message } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { navigate } from '@reach/router';
+import { navigate, Link } from '@reach/router';
 import app from '../firebaseConfig';
 import { Auth } from '../context/AuthContext';
 import Logo from '../images/logo.png';
 
-const InputGroup = Input.Group;
-
 export const validationSchema = Yup.object().shape({
-  email: Yup.string().email(),
+  email: Yup.string().email().required('required'),
   password: Yup.string().required('required'),
 });
 
@@ -25,8 +23,8 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: 'juan@juan.com',
-      password: 'test1234',
+      email: '',
+      password: '',
     },
     validationSchema,
     onSubmit: ({ email, password }, { setSubmitting }) => {
@@ -48,6 +46,7 @@ const Login = () => {
       .then((result) => {
         setSubmitting(false);
         message.success('Bienvenido', 0.9);
+        console.log(result)
         navigate('/');
         // app.auth().currentUser.getIdToken(true).then((token) => {
         //   console.log(token, 'Auth token ---')
@@ -78,27 +77,26 @@ const Login = () => {
           padding: 40,
         }}
       >
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <div className="form-group" style={{ width: '100%' }}>
             <div className="login-logo">
               <img className="logo" src={Logo} alt="" />
             </div>
-            <InputGroup>
+            <Form.Item >
               <Input
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 size="large"
                 prefix={
-                  <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  <Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 name="email"
                 placeholder="Email"
                 autoComplete="off"
               />
-            </InputGroup>
-            <br />
-            <InputGroup>
+            </Form.Item>
+            <Form.Item>
               <Input
                 value={values.password}
                 onChange={handleChange}
@@ -111,21 +109,28 @@ const Login = () => {
                 type="password"
                 placeholder="Contraseña"
               />
-            </InputGroup>
-            <br />
-            <Button
-              type="primary"
-              htmlType="submit"
-              size="large"
-              block={isSubmitting}
-              loading={isSubmitting}
-            >
-              Ingresar
-            </Button>
+            </Form.Item>
+            <Form.Item>
+              <br />
+              <Button
+                type="primary"
+                htmlType="submit"
+                size="large"
+                block={isSubmitting}
+                loading={isSubmitting}
+                style={{ width: '100%', fontSize: 18 }}
+              >
+                Ingresar
+              </Button>
+              <div className='text-center'>
+                <Link style={{ fontSize: 18 }} to='/sign-up'>Registrarse</Link>
+              </div>
+            </Form.Item>
           </div>
-        </form>
+        </Form>
       </div>
     </Content>
   );
 };
+
 export default Login;

@@ -10,6 +10,7 @@ import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { Auth } from './context/AuthContext';
+import { setContext } from 'apollo-link-context';
 
 import 'moment/locale/es';
 import './styles/main.scss';
@@ -18,24 +19,34 @@ import 'antd/dist/antd.css';
 export const App = () => {
   const { authState } = useContext(Auth);
   const isIn = authState.status === 'in';
-  const headers = isIn ? { Authorization: `Bearer ${authState.token}` } : {};
-
+  // const headers = isIn ? { Authorization: `Bearer ${authState.token}` } : {};
+  // Authorization: isIn ? `Bearer ${authState.token}` : ''
   const wsurl = 'wss://crdapp.herokuapp.com/v1/graphql';
   const httpurl = 'https://crdapp.herokuapp.com/v1/graphql';
 
+  const authLink = setContext((props) => {
+    return {
+      headers: {
+        authorization: isIn ? `Bearer ${authState.token}` : "",
+      }
+    }
+  });
+  
   const wsLink = new WebSocketLink({
     uri: wsurl,
     options: {
       reconnect: true,
       connectionParams: {
-        headers,
-      },
+        headers: {
+          Authorization: isIn ? `Bearer ${authState.token}` : ''
+        }
+      }
     },
   });
 
   const httpLink = new HttpLink({
     uri: httpurl,
-    headers,
+    // headers,
   });
 
   const link = split(
@@ -44,7 +55,7 @@ export const App = () => {
       return kind === 'OperationDefinition' && operation === 'subscription';
     },
     wsLink,
-    httpLink
+    authLink.concat(httpLink)
   );
 
   const client = new ApolloClient({

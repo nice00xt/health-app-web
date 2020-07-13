@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { Button, Spin } from 'antd';
 import moment from 'moment';
+import { isEmpty } from 'lodash';
 import { compose, withState, withHandlers } from 'recompose';
 import { questions, validationSchema, initialValues } from './validation';
 import { useMutation, useSubscription } from '@apollo/react-hooks';
 import { ADDvaloration } from '../../queries/valorations';
-import { updateStatus } from '../../queries/status';
+import { updateStatus, createStatus } from '../../queries/status';
 import Question from '../../components/question';
 import { SuccessMessage, MessageAlert, MessageWarning } from './result';
 
@@ -22,7 +23,35 @@ export const CheckValorationForm = ({ step, nextStep, backStep, fetchData }) => 
   const { loading, data } = useSubscription(fetchData);
   const [hadnleAddValorations] = useMutation(ADDvaloration);
   const [onUpdateStatus] = useMutation(updateStatus)
+  const [onCreateStatus] = useMutation(createStatus)
   const currentDate = moment().format('MMMM/DD/YYYY');
+
+  // useEffect(() => {
+  //   if (isEmpty(data.status)) {
+  //     hadnleAddValorations({
+  //       variables: { status: 0 }
+  //     })
+  //   }
+  // }, []);
+
+  const handleSetStatus = (name, description) => {
+    const variables = {
+      updated: currentDate,
+      name,
+      description,
+    }
+
+    if (isEmpty(data.status)) {
+      onCreateStatus({ variables })
+    } else {
+      onUpdateStatus({
+        variables: {
+          ...variables,
+          id: data.status.id
+        }
+      })
+    }
+  }
 
   const handleRedirect = (result, setSubmitting) => {
     if (result >= 6) {
@@ -30,39 +59,21 @@ export const CheckValorationForm = ({ step, nextStep, backStep, fetchData }) => 
         variables: { status: 3 }
       }).then(() => {
         setSubmitting(false);
-        onUpdateStatus({
-          variables: {
-            updated: currentDate,
-            name: '3',
-            id: 1,
-            description: 'El usuario Usuario 1 necesita atención medica'}
-          })
+        handleSetStatus('3', 'El usuario Usuario 1 necesita atención medica');
       })
     } else if (result === 0) {
       hadnleAddValorations({
         variables: { status: 1 }
       }).then(() => {
         setSubmitting(false);
-        onUpdateStatus({
-          variables: {
-            updated: currentDate,
-            name: '1',
-            id: 1,
-            description: ''}
-          })
+        handleSetStatus('1', '');
       })
     } else if (result >= 1) {
       hadnleAddValorations({
         variables: { status: 2 }
       }).then(() => {
         setSubmitting(false);
-        onUpdateStatus({
-          variables: {
-            updated: currentDate,
-            name: '2',
-            id: 1,
-            description: ''}
-          })
+          handleSetStatus('2', '');
       })
     }
   };
@@ -78,13 +89,10 @@ export const CheckValorationForm = ({ step, nextStep, backStep, fetchData }) => 
   const { handleSubmit, isSubmitting, setFieldValue } = formik;
 
 
-  const renderMessage = () => {
-    const status = data.status[1].name;
-    const statusDepression = data.status[0].name;
-
-    console.log(data.status, 'data.status 0')
+  const renderMessage = (currentStatus) => {
+    const status = currentStatus[1].name;
     if (status === '2') {
-      return <MessageAlert status={statusDepression} />
+      return <MessageAlert />
     } else if (status === '1') {
       return <SuccessMessage />
     } else if (status === '3') {
@@ -98,11 +106,11 @@ export const CheckValorationForm = ({ step, nextStep, backStep, fetchData }) => 
 
   return (
     <>
-      { data.status[1].updated === currentDate ? (
+      {/* { data.status[0].updated === currentDate ? (
         <section className='section fade-in--top'>
-          { renderMessage() }
+          <span>status</span>
         </section>
-      ) : (
+      ) : ( */}
         <form onSubmit={handleSubmit}>
           <div className="section ft fade-in--top">
             {{
@@ -183,7 +191,7 @@ export const CheckValorationForm = ({ step, nextStep, backStep, fetchData }) => 
             <br />
           </div>
         </form>
-      )}
+      {/* )} */}
     </>
   );
 };
