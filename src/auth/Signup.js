@@ -97,7 +97,7 @@ const Signup = () => {
   return (
     <Content
       style={{
-        display: 'flex',
+        display: 'contents',
         justifyContent: 'center',
         alignItems: 'center',
         padding: '0',
