@@ -47,11 +47,11 @@ export const Routes = () => {
         <SignUp path='sign-up' />
         <Error path='*' />
       </LayoutContent>
-        <DashboardLayout path="admin">
-          <Dashboard path="/" />
-          <UserView path="user-view" />
-          <ListView path="list-view" />
-        </DashboardLayout>
+      <DashboardLayout path="admin">
+        <Dashboard path="/" />
+        <UserView path="user-view" />
+        <ListView path="list-view" />
+      </DashboardLayout>
     </Router>
   );
 };

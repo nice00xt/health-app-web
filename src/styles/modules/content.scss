@@ -76,3 +76,21 @@
 .link-green {
   background-color: #52c41a !important;
 }
+
+.app-footer {
+  position: absolute;
+  bottom: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+  span {
+    font-size: 17px;
+    color: #9e9c9c;
+  }
+  img {
+    width: 150px;
+  }
+}

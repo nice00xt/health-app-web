@@ -6,6 +6,7 @@ import { navigate, Link } from '@reach/router';
 import app from '../firebaseConfig';
 import { Auth } from '../context/AuthContext';
 import Logo from '../images/logo.png';
+import uLogo from '../images/u-logo.png';
 
 export const validationSchema = Yup.object().shape({
   email: Yup.string().email().required('required'),
@@ -59,77 +60,84 @@ const Login = () => {
   }
 
   return (
-    <Content
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '0',
-        backgroundColor: 'white',
-      }}
-    >
-      <div
-        className="section ft fade-in--top"
+    <>
+      <Content
         style={{
-          width: '100%',
-          height: '100%',
-          boxShadow: 'none',
-          padding: 40,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '0',
+          backgroundColor: 'white',
+          flexDirection: 'column'
         }}
       >
-        <Form onSubmit={handleSubmit}>
-          <div className="form-group" style={{ width: '100%' }}>
-            <div className="login-logo">
-              <img className="logo" src={Logo} alt="" />
-            </div>
-            <Form.Item >
-              <Input
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                size="large"
-                prefix={
-                  <Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />
-                }
-                name="email"
-                placeholder="Email"
-                autoComplete="off"
-              />
-            </Form.Item>
-            <Form.Item>
-              <Input
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                size="large"
-                prefix={
-                  <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
-                }
-                name="password"
-                type="password"
-                placeholder="Contraseña"
-              />
-            </Form.Item>
-            <Form.Item>
-              <br />
-              <Button
-                type="primary"
-                htmlType="submit"
-                size="large"
-                block={isSubmitting}
-                loading={isSubmitting}
-                style={{ width: '100%', fontSize: 18 }}
-              >
-                Ingresar
-              </Button>
-              <div className='text-center'>
-                <Link style={{ fontSize: 18 }} to='/sign-up'>Registrarse</Link>
+        <div
+          className="section ft fade-in--top"
+          style={{
+            width: '100%',
+            height: '100%',
+            boxShadow: 'none',
+            padding: 40,
+          }}
+        >
+          <Form onSubmit={handleSubmit}>
+            <div className="form-group" style={{ width: '100%' }}>
+              <div className="login-logo">
+                <img className="logo" src={Logo} alt="" />
               </div>
-            </Form.Item>
-          </div>
-        </Form>
+              <Form.Item >
+                <Input
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  size="large"
+                  prefix={
+                    <Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  }
+                  name="email"
+                  placeholder="Email"
+                  autoComplete="off"
+                />
+              </Form.Item>
+              <Form.Item>
+                <Input
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  size="large"
+                  prefix={
+                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                  }
+                  name="password"
+                  type="password"
+                  placeholder="Contraseña"
+                />
+              </Form.Item>
+              <Form.Item>
+                <br />
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  size="large"
+                  block={isSubmitting}
+                  loading={isSubmitting}
+                  style={{ width: '100%', fontSize: 18 }}
+                >
+                  Ingresar
+                </Button>
+                <div className='text-center'>
+                  <Link style={{ fontSize: 18 }} to='/sign-up'>Registrarse</Link>
+                </div>
+              </Form.Item>
+            </div>
+          </Form>
+        </div>
+      </Content>
+      <div className='app-footer'>
+        <span>Powered by</span>
+        <img src={uLogo} alt="U logo" />
       </div>
-    </Content>
+    </>
   );
 };
 

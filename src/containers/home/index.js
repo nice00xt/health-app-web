@@ -9,6 +9,7 @@ import {
   Icon,
   Button
 } from 'antd';
+import uLogo from '../../images/u-logo.png'
 const { Content } = Layout;
 
 const iconStyles = {
@@ -51,6 +52,10 @@ export const Home = () => {
           })}
         </Row>
       </Content>
+      <div className='app-footer'>
+        <span>Powered by</span>
+        <img src={uLogo} alt="U logo" />
+      </div>
     </Fragment>
   )
 }
